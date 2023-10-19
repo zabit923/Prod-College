@@ -1,0 +1,108 @@
+@import 'core';
+
+.news_body{
+    height: 100%;
+}
+
+.registration_header{
+    @include size(100%, 70px);
+    background-color: #0e0e0e;
+    padding-top: 15px;
+
+
+    &>.header_navbar{
+        max-width: 100%;
+        padding: 0 40px 0 40px;
+        max-height: max-content;
+        @include flex(space-between);
+        margin: 0 auto;
+        color: #fff;
+
+
+        &>.nav_left_path{
+
+            &>h1{
+                @include font(20px, 30px, 500);
+                cursor: pointer;
+            }
+        }
+
+
+        &>.nav_right_path{
+            @include flex(space-between);
+            width: 39%;
+
+            &>li a{
+                @include font(16px, 26px, 500);
+                cursor: pointer;
+                transition: all .3s ease;
+                color: #fff;
+
+                &:hover{
+                    color: #0accee;
+                }
+                
+            }
+
+            &>.right_path_logos{
+                @include flex(space-between);
+                width: 60px;
+                padding-top: 5px;
+                gap: 10px;
+
+                &>a img{
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+.all_news{
+    padding-top: 80px;
+    padding-bottom: 30px;
+    height: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 60px;
+
+
+    &>.main_news_item{
+        position: relative;
+
+        &>img{
+            max-width: 95%;
+            min-height: 311px;
+            max-height: 311px;
+            border-radius: 2px
+        }
+
+        &>.news_date{
+            @include size(120px, 44px);
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            @include font(14px, 39px, 400);
+            border-radius: 2px;
+        }
+
+        &>.news_desc{
+            text-align: left;
+            padding-top: 20px;
+            width: 415px;
+            transition: all .3s ease;
+
+            &> a{
+                cursor: pointer;
+                @include font(20px, 30px, 500);
+
+                &:hover{
+                    color: #0accee;
+                }
+            }
+        }
+    }
+}

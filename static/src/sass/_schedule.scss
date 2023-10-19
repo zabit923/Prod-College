@@ -1,0 +1,51 @@
+@import 'core';
+
+.schedule_title{
+    @include font(46px, 60px, 500);
+    text-align: center;
+    margin-top: 2%;
+}
+
+.schedule_container{
+    @include size(70%, max-content);
+    margin: 0 auto;
+    margin-top: 3%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    &>li{
+        height: 200px;
+        border: 1px solid #0e0e0e;
+        border-radius: 15px;
+        @include font(16px, 26px, 400);
+        padding: 10px;
+        position: relative;
+
+        &>h2{
+            margin-top: 20px;
+            color: rgb(71, 71, 70);
+        }
+
+        &>button{
+            @include button();
+            background-color: black;
+            border-radius: 10px;
+            margin-top: 10%;
+            transition: all .3s ease;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+
+            &>a{
+                @include font(16px, 16px, 500);
+                color: white;
+            }
+
+            &:hover{
+                background-color: #0accee;
+            }
+        }
+
+    }
+}

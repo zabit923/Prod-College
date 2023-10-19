@@ -1,0 +1,42 @@
+@import 'core';
+
+.one_news_main{
+    height: 100vh;
+
+    &>.one_news{
+        position: relative;
+        @include size(70%, max-content);
+        margin: 0 auto;
+        margin-top: 2%;
+
+        &>img{
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        &>.one_news_date{
+            @include size(25%, 44px);
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            @include font(14px, 39px, 400);
+        }
+
+        &>.one_news_desc{
+            width: fit-content;
+            text-align: center;
+            padding-top: 20px;
+            @include font(24px, 30px, 500);
+            color: #0accee;
+            padding-left: 2%;
+        }
+
+        &>.one_news_par{
+            @include font(20px, 26px, 500);
+            margin-top: 5%;
+            padding-left: 2%;
+        }
+    }
+}

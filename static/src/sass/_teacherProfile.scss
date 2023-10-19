@@ -1,0 +1,181 @@
+@import 'core';
+
+.teacher_profile_header{
+    @include size(100%, 70px);
+    background-color: #0e0e0e;
+    padding-top: 15px;
+    
+    &>.header_navbar{
+        max-width: 100%;
+        padding: 0 40px 0 40px;
+        max-height: max-content;
+        @include flex(space-between);
+        margin: 0 auto;
+        color: #fff;
+    
+    
+        &>.nav_left_path{
+    
+            &>h1{
+                @include font(20px, 30px, 500);
+                cursor: pointer;
+            }
+        }
+    
+    
+        &>.nav_right_path{
+            @include flex(space-between);
+            width: 39%;
+    
+            &>li a{
+                @include font(16px, 26px, 500);
+                cursor: pointer;
+                transition: all .3s ease;
+                color: #fff;
+    
+                &:hover{
+                    color: #0accee;
+                }
+                
+            }
+    
+            &>.right_path_logos{
+                @include flex(space-between);
+                width: 60px;
+                padding-top: 5px;
+                gap: 10px;
+    
+                &>a img{
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+.teacher_container{
+    @include size(60%, max-content);
+    margin: 0 auto;
+    margin-top: 5%;
+    @include flex();
+    align-items: start;
+
+    &>.teacher_profile{
+
+        .input-file {
+            position: relative;
+            display: block;
+            height: max-content;
+            width: 250px;
+        
+            &>.edit {
+                position: absolute;
+                right: 3px;
+                bottom: -10px;
+                cursor: pointer;
+            }
+        
+            &>input[type=file] {
+                position: absolute;
+                z-index: 1;
+                opacity: 0;
+                display: block;
+                width: 0;
+                height: 0;
+            }
+
+            &>img{
+                @include size(230px, 100%);
+                border: 3px solid black;
+            }
+            
+        }
+
+
+        &>.teacher_name{
+
+            &>h1,h2,h3{
+                @include font(36px, 46px, 400);
+            }
+
+            &>h1{
+                margin-top: 10px;
+            }
+        }
+    }
+
+    &>.teacher_lectures{
+        width: 70%;
+
+        &>h1{
+            @include font(48px, 58px, 500);
+            text-align: center;
+            color: #0accee;
+        }
+
+        &>.teacher_line{
+            @include size(100px, 2px);
+            margin: 0 auto;
+            margin-top: 10px;
+            background-color: #0e0e0e;
+        }
+
+        &>h2{
+            @include font(75px, 70px, 400);
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        &>button{
+            @include button();
+            margin: 0 40%;
+            margin-top: 70px;
+
+            &>a{
+                @include font(16px, 16px, 500);
+                color: white;
+            }
+        }
+
+        &>.all_lectures{
+            width: 100%;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            margin-top: 20px;
+
+            &>.lecture{
+                padding: 10px;
+                height: max-content;
+                background: var(--bg-popup-default, #FFF);
+                border: 1px solid black;
+                border-radius: 10px;
+                position: relative;
+
+                &>button{
+                    background-color: #FFF;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 20px;
+                    position: absolute;
+                    right: 5px;
+                    top: 0;
+                }
+
+                &>h1{
+                    @include font(24px, 16px, 500);
+                }
+
+                &>p{
+                    margin-top: 2%;
+                    @include font(16px, 24px, 400);
+
+                    &>a{
+                        color: #0accee;
+                    }
+                }
+            }
+        }
+    }
+}
+

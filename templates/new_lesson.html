@@ -1,0 +1,60 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Блог</title>
+
+    <link rel="stylesheet" href="{% static 'src/css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'src/css/reset.css' %}">
+
+</head>
+<body>
+    <header class="blog_header">
+            <div class="header_navbar" id="header_navbar">
+                <div class="nav_left_path">
+                    <h1><a style="color: #fff;" href="/">Колледж ДГУ</a></h1>
+                    <div class="header_burger" id="header_burger"></div>
+                </div>
+                <ul style="width: 55%;" class="nav_right_path" id="nav_right_path">
+                    <li><a href="/">Главная</a></li>
+                    {% if user.is_teacher %}
+                        <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
+                    {% endif %}
+                    <li><a href="https://dgucolledge.ru/">Новости</a></li>
+                    <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                    <li><a href="{% url 'users:blog' %}">Блог</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a style="color: #fff;" href="{% url 'users:profile' user.id%}">Профиль</a></li>
+                    {% else %}
+                        <li><a style="color: #fff;" href="{% url 'users:login' %}">Вход</a></li>
+                    {% endif %}
+                    <li class="right_path_logos" id="right_path_logos">
+                        <a href="https://t.me/colledgedsu"><img src="{% static 'src/images/telegram.svg' %}" alt="телеграм"></a>
+                        <a href="https://vk.com/mediaclubcollegedgu"><img src="{% static 'src/images/vk.svg' %}" alt="вк"></a>
+                    </li>
+                </ul>
+            </div>
+    </header>
+    {% if user.is_teacher %}
+        <main>
+            <form style="width: 90%;" class="main_blog_form" method="post">
+                <h1>Ваша Лекция</h1>
+                {% csrf_token %}
+                <input type="text" name="title" placeholder="Название лекции">
+                {{ form.media }}{{ form.description }}
+                <button>Опубликовать</button>
+            </form>
+        </main>
+    {% else %}
+        <h1>Ты не преподаватель!</h1>
+    {% endif %}
+    
+    <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
+</body>
+</html>
