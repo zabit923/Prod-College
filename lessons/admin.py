@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Lecture, Schedules
+from .models import Lecture, Schedules, RPD
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
@@ -20,5 +20,10 @@ class LectureAdmin(admin.ModelAdmin):
 
 
 @admin.register(Schedules)
-class LectureAdmin(admin.ModelAdmin):
+class ScheduleAdmin(admin.ModelAdmin):
     list_display = ('facult',)
+
+
+@admin.register(RPD)
+class RPDAdmin(admin.ModelAdmin):
+    list_display = ('course',)

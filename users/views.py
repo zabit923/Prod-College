@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView
 
 from .forms import UserLoginForm, UserProfileForm, LectureForm
 from .models import User
-from lessons.models import Lecture, Schedules
+from lessons.models import Lecture, Schedules, RPD
 
 
 
@@ -36,6 +36,12 @@ class UserProfileView(UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'users/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['all_rpd'] = RPD.objects.filter(course=user.course)
+        return context
 
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.object.id,))
@@ -94,7 +100,12 @@ class SchedulesView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['all_schedules'] = Schedules.objects.all()
+        user = self.request.user
+
+        if user.is_teacher:
+            context['all_schedules'] = Schedules.objects.all()
+        else:
+            context['all_schedules'] = Schedules.objects.filter(course=user.course)
         return context
 
 
@@ -123,3 +134,4 @@ class PublicTeacherProfile(TemplateView):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+

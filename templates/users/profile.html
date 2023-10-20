@@ -36,9 +36,11 @@
                                     изображение</label>
                             </div>
                         </div>
+                        {% for rpd in all_rpd %}
+                            <a style="margin: 10px;" href="{{ rpd.rpd.url }}">РПД</a>
+                        {% endfor %}
                         {% if user.is_teacher %}
                             <a style="margin: 10px;" href="/media/20220810-г4.pdf">ФОС</a>
-                            <a style="margin: 10px;" href="/media/20230820м49.pdf">РПД</a>
                         {% endif %}
                         <a style="margin: 10px;" href="https://urait.ru/">Юрайт</a>
                     </div>

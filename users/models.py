@@ -36,7 +36,6 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
     is_teacher = models.BooleanField(default=False)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
-    course2 = models.CharField(max_length=128, null=True, blank=True)
 
     def __str__(self):
         return self.first_name or self.username
