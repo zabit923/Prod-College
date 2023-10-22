@@ -20,6 +20,8 @@ class Course(models.Model):
     facult = models.ForeignKey(Facult, on_delete=models.CASCADE)
 
     def __str__(self):
+        if f'{self.facult}' == 'учитель':
+            return f'{self.facult}'
         return f"{self.name} курс {self.facult}"
 
     class Meta:
