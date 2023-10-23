@@ -3,7 +3,7 @@ from datetime import date
 from django.urls import reverse
 from django.utils import timezone
 from datetime import datetime
-from users.models import User, Course
+from users.models import User, Course, Facult
 
 
 
@@ -24,7 +24,7 @@ class Lecture(models.Model):
 
 
 class Schedules(models.Model):
-    facult = models.CharField('Название факультета', max_length=150)
+    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.CharField('Дата действия расписания', max_length=150)
     schedule = models.FileField('PDF ссылка на расписание', max_length=300)
@@ -35,6 +35,7 @@ class Schedules(models.Model):
 
 
 class RPD(models.Model):
+    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     rpd = models.FileField('Файл с РПД', max_length=300)
 

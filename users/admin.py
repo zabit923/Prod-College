@@ -15,13 +15,7 @@ class FacultAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('formatted_course', 'facult')
-
-    def formatted_course(self, obj):
-        return f"{obj.name} курс {obj.facult}"
-
-    formatted_course.short_description = 'Course'
-
+    list_display = ('name',)
 
 
 @admin.register(TeacherLink)

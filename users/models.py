@@ -17,12 +17,9 @@ class Facult(models.Model):
 
 class Course(models.Model):
     name = models.CharField('Курс', max_length=5)
-    facult = models.ForeignKey(Facult, on_delete=models.CASCADE)
 
     def __str__(self):
-        if f'{self.facult}' == 'учитель':
-            return f'{self.facult}'
-        return f"{self.name} курс {self.facult}"
+        return f"{self.name} курс"
 
     class Meta:
         verbose_name = 'Курс'
@@ -38,9 +35,10 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
     is_teacher = models.BooleanField(default=False)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
+    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.first_name or self.username
+        return f'{self.first_name} {self.last_name}' or self.username
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -49,8 +47,9 @@ class User(AbstractUser):
 
 class TeacherLink(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    link = models.URLField()
+    faculty = models.ForeignKey(Facult, on_delete=models.CASCADE, default='')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default='')
+    link = models.CharField(max_length=150, null=True, blank=False)
 
     def __str__(self):
         return f"Ссылка для {self.course} от {self.teacher}"
