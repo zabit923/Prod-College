@@ -24,8 +24,8 @@ class Lecture(models.Model):
 
 
 class Schedules(models.Model):
-    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
+    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True, default='')
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True, default='')
     date = models.CharField('Дата действия расписания', max_length=150)
     schedule = models.FileField('PDF ссылка на расписание', max_length=300)
 
@@ -35,8 +35,8 @@ class Schedules(models.Model):
 
 
 class RPD(models.Model):
-    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
+    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True, default='')
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True, default='')
     rpd = models.FileField('Файл с РПД', max_length=300)
 
     class Meta:

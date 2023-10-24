@@ -7,6 +7,7 @@ SECRET_KEY = 'django-insecure-3_5c*$x(2z%ysdsrfiidfgvj934u38df78*(k-7o=-effqvcko
 
 
 DEBUG = False
+
 ALLOWED_HOSTS = ['127.0.0.1']
 
 DATABASES = {

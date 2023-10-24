@@ -34,8 +34,8 @@ class User(AbstractUser):
     username = models.CharField(unique=True, max_length=150, null=True, blank=True)
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
     is_teacher = models.BooleanField(default=False)
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
-    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True, default='')
+    facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True, default='')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}' or self.username
