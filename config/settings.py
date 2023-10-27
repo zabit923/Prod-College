@@ -197,6 +197,8 @@ RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 try:
     from .local_settings import *

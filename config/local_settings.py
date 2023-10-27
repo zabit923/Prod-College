@@ -15,13 +15,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'DGU2',
         'USER': 'postgres',
-        'PASSWORD': 'zabit00901',
+        'PASSWORD': 'Abusik19',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
-
 
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
