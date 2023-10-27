@@ -45,7 +45,7 @@
                     {% if user.is_teacher %}
                         <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
                     {% endif %}
-                    <li><a href="https://dgucolledge.ru/">Новости</a></li>
+                    <li><a href="/news">Новости</a></li>
                     <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
                     <li><a href="{% url 'users:blog' %}">Блог</a></li>
                     {% if user.is_authenticated %}
@@ -103,7 +103,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- <div class="main_news" id="main_news">
+            <div class="main_news" id="main_news">
                 <h1 class="main_news_title">Что нового?</h1>
                 <ul class="main_all_news" id="main_all_news">
                     {% for new in news %}
@@ -115,7 +115,7 @@
                     {% endfor %}
                 </ul>
                 <button><a href="/news">Больше новостей</a></button>
-            </div> -->
+            </div> 
     </main>
     <footer class="footer">
         <div class="footer_content">
@@ -128,6 +128,10 @@
                 <div class="footer_feedback">
                     <h2 style="color: #fff">8 (722) 67-42-65</h2>
                     <a href="mailto:collegedsu@mail.ru">collegedsu@mail.ru</a>
+                    <h2 style="color: #fff; margin-top: 20px">Created by:</h2>
+                    <h2 style="color: #fff; font-size: 16px; line-height: 20px;">Гасанбеков Абужапар</h2>
+                    <h2 style="color: #fff; font-size: 16px; line-height: 20px;">Ибрагимов Забит</h2>
+                    <h2 style="color: #fff; font-size: 16px; line-height: 20px;">Шафиев Саид</h2>
                 </div>
                 <div class="footer_messenger">
                     <a class="footer_telegram" href="https://t.me/colledgedsu"><img id="footer_telegram" src="{% static 'src/images/telegram.svg' %}" alt="телеграм"></a>

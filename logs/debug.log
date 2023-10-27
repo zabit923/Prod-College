@@ -1,0 +1,72 @@
+[2023-10-25 00:24:44 +0300] [4301] [INFO] Starting gunicorn 21.2.0
+[2023-10-25 00:24:44 +0300] [4301] [INFO] Listening at: http://127.0.0.1:8000 (4301)
+[2023-10-25 00:24:44 +0300] [4301] [INFO] Using worker: sync
+[2023-10-25 00:24:44 +0300] [4302] [INFO] Booting worker with pid: 4302
+[2023-10-25 00:24:44 +0300] [4303] [INFO] Booting worker with pid: 4303
+[2023-10-25 00:24:44 +0300] [4304] [INFO] Booting worker with pid: 4304
+[2023-10-25 00:30:46 +0300] [4301] [INFO] Handling signal: term
+[2023-10-24 21:30:46 +0000] [4302] [INFO] Worker exiting (pid: 4302)
+[2023-10-24 21:30:46 +0000] [4303] [INFO] Worker exiting (pid: 4303)
+[2023-10-24 21:30:46 +0000] [4304] [INFO] Worker exiting (pid: 4304)
+[2023-10-25 00:30:47 +0300] [4301] [INFO] Shutting down: Master
+[2023-10-25 00:43:11 +0300] [9314] [INFO] Starting gunicorn 21.2.0
+[2023-10-25 00:43:11 +0300] [9314] [INFO] Listening at: http://127.0.0.1:8000 (9314)
+[2023-10-25 00:43:11 +0300] [9314] [INFO] Using worker: sync
+[2023-10-25 00:43:11 +0300] [9315] [INFO] Booting worker with pid: 9315
+[2023-10-25 00:43:11 +0300] [9316] [INFO] Booting worker with pid: 9316
+[2023-10-25 00:43:11 +0300] [9317] [INFO] Booting worker with pid: 9317
+[2023-10-25 00:49:34 +0300] [9314] [INFO] Handling signal: term
+[2023-10-24 21:49:34 +0000] [9315] [INFO] Worker exiting (pid: 9315)
+[2023-10-24 21:49:34 +0000] [9316] [INFO] Worker exiting (pid: 9316)
+[2023-10-24 21:49:34 +0000] [9317] [INFO] Worker exiting (pid: 9317)
+[2023-10-25 00:49:34 +0300] [9314] [INFO] Shutting down: Master
+[2023-10-25 00:49:35 +0300] [9425] [INFO] Starting gunicorn 21.2.0
+[2023-10-25 00:49:35 +0300] [9425] [INFO] Listening at: http://127.0.0.1:8000 (9425)
+[2023-10-25 00:49:35 +0300] [9425] [INFO] Using worker: sync
+[2023-10-25 00:49:35 +0300] [9426] [INFO] Booting worker with pid: 9426
+[2023-10-25 00:49:35 +0300] [9427] [INFO] Booting worker with pid: 9427
+[2023-10-25 00:49:35 +0300] [9428] [INFO] Booting worker with pid: 9428
+Not Found: /aaa9
+Not Found: /aab9
+Not Found: /aaa9
+Not Found: /aab9
+Not Found: /accounts/login/
+Forbidden (CSRF token from POST incorrect.): /users/login/
+Forbidden (CSRF token from POST incorrect.): /users/login/
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /aaa9
+Not Found: /aab9
+[2023-10-25 02:33:24 +0300] [9425] [INFO] Handling signal: term
+[2023-10-24 23:33:24 +0000] [9426] [INFO] Worker exiting (pid: 9426)
+[2023-10-24 23:33:24 +0000] [9427] [INFO] Worker exiting (pid: 9427)
+[2023-10-24 23:33:24 +0000] [9428] [INFO] Worker exiting (pid: 9428)
+[2023-10-25 02:33:24 +0300] [9425] [INFO] Shutting down: Master
+[2023-10-25 02:33:25 +0300] [11407] [INFO] Starting gunicorn 21.2.0
+[2023-10-25 02:33:25 +0300] [11407] [INFO] Listening at: http://127.0.0.1:8000 (11407)
+[2023-10-25 02:33:25 +0300] [11407] [INFO] Using worker: sync
+[2023-10-25 02:33:25 +0300] [11408] [INFO] Booting worker with pid: 11408
+[2023-10-25 02:33:25 +0300] [11409] [INFO] Booting worker with pid: 11409
+[2023-10-25 02:33:25 +0300] [11410] [INFO] Booting worker with pid: 11410
+[2023-10-25 02:54:39 +0300] [11407] [INFO] Handling signal: term
+[2023-10-24 23:54:39 +0000] [11408] [INFO] Worker exiting (pid: 11408)
+[2023-10-24 23:54:39 +0000] [11409] [INFO] Worker exiting (pid: 11409)
+[2023-10-24 23:54:39 +0000] [11410] [INFO] Worker exiting (pid: 11410)
+[2023-10-25 02:54:40 +0300] [11407] [INFO] Shutting down: Master
+[2023-10-25 02:54:40 +0300] [11762] [INFO] Starting gunicorn 21.2.0
+[2023-10-25 02:54:40 +0300] [11762] [INFO] Listening at: http://127.0.0.1:8000 (11762)
+[2023-10-25 02:54:40 +0300] [11762] [INFO] Using worker: sync
+[2023-10-25 02:54:40 +0300] [11763] [INFO] Booting worker with pid: 11763
+[2023-10-25 02:54:40 +0300] [11764] [INFO] Booting worker with pid: 11764
+[2023-10-25 02:54:40 +0300] [11765] [INFO] Booting worker with pid: 11765
+[2023-10-25 19:35:54 +0300] [11762] [INFO] Handling signal: term
+[2023-10-25 16:35:54 +0000] [11763] [INFO] Worker exiting (pid: 11763)
+[2023-10-25 16:35:54 +0000] [11764] [INFO] Worker exiting (pid: 11764)
+[2023-10-25 16:35:54 +0000] [11765] [INFO] Worker exiting (pid: 11765)
+[2023-10-25 19:35:55 +0300] [11762] [INFO] Shutting down: Master
+[2023-10-25 19:35:55 +0300] [21324] [INFO] Starting gunicorn 21.2.0
+[2023-10-25 19:35:55 +0300] [21324] [INFO] Listening at: http://127.0.0.1:8000 (21324)
+[2023-10-25 19:35:55 +0300] [21324] [INFO] Using worker: sync
+[2023-10-25 19:35:55 +0300] [21325] [INFO] Booting worker with pid: 21325
+[2023-10-25 19:35:55 +0300] [21326] [INFO] Booting worker with pid: 21326
+[2023-10-25 19:35:55 +0300] [21327] [INFO] Booting worker with pid: 21327
