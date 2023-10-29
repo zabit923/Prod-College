@@ -45,7 +45,7 @@
        <ul style="margin-bottom: 50px;" class="all_teachers_container" id="all_teachers_container">
            {% for teacher in all_teachers %}
                 <li>
-                    <img style="width: 218px; height:218px" src="{% if teacher.image %} {{ teacher.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}" alt="">
+                   <img src="{% if teacher.image %} {{ teacher.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}" alt="">
                     <h1>{{ teacher.first_name }}  {{ teacher.last_name }}</h1>
                     <button><a href="{% url 'users:public_profile' teacher.id %}">Смотреть лекции</a></button>
                 </li>

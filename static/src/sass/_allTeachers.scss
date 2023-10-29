@@ -1,51 +1,51 @@
 @import 'core';
 
-.teacher_profile_header{
+.teacher_profile_header {
     @include size(100%, 70px);
     background-color: #0e0e0e;
     padding-top: 15px;
-    
-    &>.header_navbar{
+
+    &>.header_navbar {
         max-width: 100%;
         padding: 0 40px 0 40px;
         max-height: max-content;
         @include flex(space-between);
         margin: 0 auto;
         color: #fff;
-    
-    
-        &>.nav_left_path{
-    
-            &>h1{
+
+
+        &>.nav_left_path {
+
+            &>h1 {
                 @include font(20px, 30px, 500);
                 cursor: pointer;
             }
         }
-    
-    
-        &>.nav_right_path{
+
+
+        &>.nav_right_path {
             @include flex(space-between);
             width: 39%;
-    
-            &>li a{
+
+            &>li a {
                 @include font(16px, 26px, 500);
                 cursor: pointer;
                 transition: all .3s ease;
                 color: #fff;
-    
-                &:hover{
+
+                &:hover {
                     color: #0accee;
                 }
-                
+
             }
-    
-            &>.right_path_logos{
+
+            &>.right_path_logos {
                 @include flex(space-between);
                 width: 60px;
                 padding-top: 5px;
                 gap: 10px;
-    
-                &>a img{
+
+                &>a img {
                     width: 30px;
                 }
             }
@@ -53,37 +53,38 @@
     }
 }
 
-.all_teachers_container{
+.all_teachers_container {
     @include size(70%, fit-content);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 265px);
     margin: 0 auto;
     margin-top: 5%;
-    gap: 20px;
+    gap: 60px;
     row-gap: 50px;
 
-    &>li{
+    &>li {
         text-align: center;
-        
-        &>img{
-            width: 80%;
+
+
+        &>img {
             border-radius: 50%;
+            width: 100%;
+            height: 255px;
         }
 
-        &>h1{
+        &>h1 {
             @include font(24px, 16px, 500);
             margin-top: 10%
         }
 
-        &>button{
+        &>button {
             @include button();
             margin-top: 10%;
 
-            &>a{
+            &>a {
                 @include font(16px, 16px, 500);
                 color: white;
             }
         }
     }
 }
-
