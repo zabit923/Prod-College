@@ -401,7 +401,7 @@ body {
 @media (max-width: 767px) {
   .header {
     height: 600px;
-    position: relative;``
+    position: relative;
   }
   .header_content {
     width: 100%;
@@ -536,8 +536,8 @@ body {
   #main_all_news > .main_news_item > img {
     max-width: 100%;
     border-radius: 2px;
-    min-height: 250px;
     max-height: 250px;
+    min-height: 250px;
   }
   #main_all_news > .main_news_item > .news_desc {
     width: 100%;
