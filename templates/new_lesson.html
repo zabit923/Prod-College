@@ -47,9 +47,9 @@
                 <h1>Ваша Лекция</h1>
                 {% csrf_token %}
                 <input type="text" name="title" placeholder="Название лекции">
-                {{ form.media }}{{ form.description }}
-                <button>Опубликовать</button>
+                <div class="ckeditor">{{ form.media }}{{ form.description }}</div>
             </form>
+            <button class="publish_lecture">Опубликовать</button>
         </main>
     {% else %}
         <h1>Ты не преподаватель!</h1>

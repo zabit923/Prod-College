@@ -54,7 +54,8 @@
 }
 
 .main_blog_form{
-    @include size(30%, 670px);
+    position: relative;
+    @include size(30%, max-content);
     margin: 0 auto;
     margin-top: 3%;
     background: var(--bg-popup-default, #FFF);
@@ -91,18 +92,6 @@
             outline: none;
         }
     }
-
-    &>button{
-        @include size(84%, 10%);
-        @include font(24px, 18px, 500);
-        background-color: #0accee;
-        color: #FFF;
-        border: none;
-        border-radius: 5px;
-        margin-left: 9%;
-        margin-top: 5%;
-        cursor: pointer;
-    }
 }
 
 textarea::-webkit-scrollbar {
@@ -122,4 +111,23 @@ textarea::-webkit-scrollbar-thumb {
     /* округлось бегунка */
     border: 3px solid rgb(255, 255, 255);
     /* отступ вокруг бегунка */
+}
+
+.ckeditor{
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.publish_lecture {
+    @include size(84%, 70px);
+    @include font(24px, 18px, 500);
+    background-color: #0accee;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    margin-left: 9%;
+    margin-top: 2%;
+    cursor: pointer;
+    margin-bottom: 50px;
 }

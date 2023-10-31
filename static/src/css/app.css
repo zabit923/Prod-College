@@ -32,6 +32,7 @@
   font-family: "Inter", sans-serif;
   line-height: 30px;
   cursor: pointer;
+  list-style-type: none;
 }
 .header_content > .header_navbar > .nav_right_path {
   display: flex;
@@ -952,8 +953,10 @@ body {
 }
 
 .main_blog_form {
+  position: relative;
   width: 30%;
-  height: 670px;
+  height: -moz-max-content;
+  height: max-content;
   margin: 0 auto;
   margin-top: 3%;
   background: var(--bg-popup-default, #FFF);
@@ -997,21 +1000,6 @@ body {
 .main_blog_form > textarea:focus {
   outline: none;
 }
-.main_blog_form > button {
-  width: 84%;
-  height: 10%;
-  font-size: 24px;
-  font-weight: 500;
-  font-family: "Inter", sans-serif;
-  line-height: 18px;
-  background-color: #0accee;
-  color: #FFF;
-  border: none;
-  border-radius: 5px;
-  margin-left: 9%;
-  margin-top: 5%;
-  cursor: pointer;
-}
 
 textarea::-webkit-scrollbar {
   width: 12px;
@@ -1030,6 +1018,29 @@ textarea::-webkit-scrollbar-thumb {
   /* округлось бегунка */
   border: 3px solid rgb(255, 255, 255);
   /* отступ вокруг бегунка */
+}
+
+.ckeditor {
+  text-align: center;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.publish_lecture {
+  width: 84%;
+  height: 70px;
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  line-height: 18px;
+  background-color: #0accee;
+  color: #FFF;
+  border: none;
+  border-radius: 5px;
+  margin-left: 9%;
+  margin-top: 2%;
+  cursor: pointer;
+  margin-bottom: 50px;
 }
 
 .teacher_profile_header {
