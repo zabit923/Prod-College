@@ -363,6 +363,13 @@
   color: #fff;
 }
 
+.teacher_profile_faculty_droplist, .teacher_profile_course_droplist {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+
 body::-webkit-scrollbar {
   width: 12px;
   /* ширина всей полосы прокрутки */

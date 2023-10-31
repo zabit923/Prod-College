@@ -324,3 +324,8 @@
     }
 }
 
+//Выпадающие список в профиле учителя
+.teacher_profile_faculty_droplist, .teacher_profile_course_droplist{
+    @include flex();
+    width: 200px;
+}
