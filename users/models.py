@@ -26,6 +26,17 @@ class Course(models.Model):
         verbose_name_plural = 'Курсы'
 
 
+class Group(models.Model):
+    name = models.CharField('Группа', max_length=5)
+
+    def __str__(self):
+        return f"{self.name} группа"
+
+    class Meta:
+        verbose_name = 'Группа'
+        verbose_name_plural = 'Группы'
+
+
 class User(AbstractUser):
     password = models.CharField(max_length=128, null=True, blank=True)
     student_id = models.CharField(max_length=128)
@@ -36,6 +47,7 @@ class User(AbstractUser):
     is_teacher = models.BooleanField(default=False)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True, default='')
     facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True, default='')
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=True, default='')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}' or self.username
@@ -49,6 +61,7 @@ class TeacherLink(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     faculty = models.ForeignKey(Facult, on_delete=models.CASCADE, default='')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default='')
+    group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.CASCADE, default='')
     link = models.CharField(max_length=150, null=True, blank=False)
 
     def __str__(self):

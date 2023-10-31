@@ -44,6 +44,9 @@
                         {% if user.is_teacher %}
                             <a style="margin: 10px;" href="/media/20220810-г4.pdf">ФОС</a>
                         {% endif %}
+                        {% for schedule in schedules %}
+                            <a style="margin: 10px;" href="{{ schedule.schedule.url }}">Расписание</a>
+                        {% endfor %}
                         <a style="margin: 10px;" href="https://urait.ru/">Юрайт</a>
                     </div>
                     <div class="form-row">
@@ -62,6 +65,7 @@
                     {% if user.is_teacher %}
                         {{ form.link_form.facult.label_tag }} {{ form.link_form.facult }}
                         {{ form.link_form.course.label_tag }} {{ form.link_form.course }}
+                        {{ form.link_form.group.label_tag }} {{ form.link_form.group }}
                         {{ form.link_form.link.label_tag }} {{ form.link_form.link }}
                         <div class="form-row">
                             <div class="col-lg-12" style="margin-top: 33px;">

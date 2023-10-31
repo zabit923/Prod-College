@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, Facult, Course, TeacherLink
+from .models import User, Facult, Course, TeacherLink, Group
 
 
 @admin.register(User)
@@ -15,6 +15,11 @@ class FacultAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 

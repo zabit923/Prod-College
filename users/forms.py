@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.utils.timezone import now
 
-from .models import User, TeacherLink, Facult, Course
+from .models import User, TeacherLink, Facult, Course, Group
 from lessons.models import Lecture
 
 
@@ -30,6 +30,7 @@ class UserLoginForm(AuthenticationForm):
 class LinkForm(forms.ModelForm):
     facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Факультет')
     course = forms.ModelChoiceField(queryset=Course.objects.all(), label='Курс')
+    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Группа')
     link = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}), label='Ссылка')
 
     class Meta:
@@ -51,8 +52,11 @@ class UserProfileForm(UserChangeForm):
 
 
 class LectureForm(forms.ModelForm):
+    facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Факультет')
+    course = forms.ModelChoiceField(queryset=Course.objects.all(), label='Курс')
+    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Группа')
     description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Lecture
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'facult', 'course', 'group']
