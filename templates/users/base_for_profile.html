@@ -37,7 +37,9 @@
                     <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
                 {% endif %}
                 <li><a href="/news">Новости</a></li>
-                <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                {% if user.is_teacher %}
+                    <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                {% endif %}
                 <li><a href="{% url 'users:blog' %}">Блог</a></li>
                 {% if user.is_authenticated %}
                     <li><a style="color: #fff;" href="{% url 'users:profile' user.id%}">Профиль</a></li>

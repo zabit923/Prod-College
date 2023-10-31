@@ -9,6 +9,7 @@ from .forms import UserLoginForm, UserProfileForm, LectureForm, LinkForm
 from .models import User, Course, TeacherLink
 from lessons.models import Lecture, Schedules, RPD
 from django.shortcuts import get_object_or_404
+from django.views.generic.detail import DetailView
 
 
 
@@ -41,10 +42,12 @@ class UserProfileView(UpdateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         if user.is_teacher:
-            context['form'] = UserProfileForm(instance=user, initial={'facult': user.facult, 'course': user.course})
+            context['form'] = UserProfileForm(instance=user, initial={'facult': user.facult, 'course': user.course,
+                                              'group': user.group})
         else:
-            context['links'] = TeacherLink.objects.filter(faculty=user.facult, course=user.course)
+            context['links'] = TeacherLink.objects.filter(faculty=user.facult, course=user.course, group=user.group)
         context['all_rpd'] = RPD.objects.filter(course=user.course, facult=user.facult)
+        context['schedules'] = Schedules.objects.filter(facult=user.facult, course=user.course, group=user.group)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -52,14 +55,15 @@ class UserProfileView(UpdateView):
         if link_form.is_valid():
             facult = link_form.cleaned_data['facult']
             course = link_form.cleaned_data['course']
+            group = link_form.cleaned_data['group']
             link = link_form.cleaned_data['link']
             user = request.user
-            existing_link = TeacherLink.objects.filter(teacher=user, faculty=facult, course=course).first()
+            existing_link = TeacherLink.objects.filter(teacher=user, faculty=facult, course=course, group=group).first()
             if existing_link:
                 existing_link.link = link
                 existing_link.save()
             else:
-                new_link = TeacherLink(teacher=user, faculty=facult, course=course, link=link)
+                new_link = TeacherLink(teacher=user, faculty=facult, course=course, group=group, link=link)
                 new_link.save()
 
         return super().post(request, *args, **kwargs)
@@ -111,9 +115,23 @@ def delete_lecture(request, lecture_id):
     return redirect(profile_url)
 
 
-def lecture_detail(request, lecture_id):
-    lecture = get_object_or_404(Lecture, pk=lecture_id)
-    return render(request, 'lecture.html', {'lecture': lecture})
+class LectureDetail(DetailView):
+    model = Lecture
+    template_name = 'lecture.html'
+    context_object_name = 'lecture'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        facult = self.object.facult
+        course = self.object.course
+        group = self.object.group
+
+        context['facult'] = facult
+        context['course'] = course
+        context['group'] = group
+
+        return context
 
 
 class SchedulesView(TemplateView):
@@ -143,8 +161,11 @@ class PublicTeacherProfile(TemplateView):
     template_name = 'teacher-public_profile.html'
 
     def get(self, request, teacher_id):
+        facult = self.request.user.facult
+        course = self.request.user.course
+        group = self.request.user.group
         teacher = User.objects.get(id=teacher_id, is_teacher=True)
-        lectures = teacher.lectures.order_by('-created_at')
+        lectures = teacher.lectures.filter(facult=facult, course=course, group=group).order_by('-created_at')
         context = {
             'teacher': teacher,
             'lectures': lectures
