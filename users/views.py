@@ -25,8 +25,7 @@ def login(request):
             auth.login(request, user)
             return HttpResponseRedirect(reverse('users:profile', args=[request.user.pk]))
         else:
-            messages.error(request, 'Извините, нам пока не дали таблицу базы данных со всеми студентами, попробуйте '
-                                    'войти в аккаунт попозже')
+            messages.error(request, 'Извините, попробуйте войти в аккаунт попозже')
     else:
         form = UserLoginForm()
     context = {'form': form}
@@ -151,10 +150,15 @@ class SchedulesView(TemplateView):
 class AllTeachers(TemplateView):
     template_name = 'all-teachers.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['all_teachers'] = User.objects.filter(is_teacher=True)
-        return context
+    def get(self, request, **kwargs):
+        user = self.request.user
+        facult = user.facult
+        course = user.course
+        group = user.group
+        teachers = User.objects.filter(is_teacher=True)
+        teachers_with_lectures = teachers.filter(lectures__facult=facult, lectures__course=course, lectures__group=group).distinct()
+        context = {'all_teachers': teachers_with_lectures}
+        return render(request, self.template_name, context)
 
 
 class PublicTeacherProfile(TemplateView):
