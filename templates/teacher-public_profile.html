@@ -45,7 +45,7 @@
 
     <main>
         <div style="width: 80%;" class="teacher_container" id="teacher_container">
-            <div class="teacher_profile">
+            <div class="teacher_profile" id="teacher_profile">
                 <label class="input-file">
                     <img src="{% if teacher.image %} {{ teacher.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
                 </label>

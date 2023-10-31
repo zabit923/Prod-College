@@ -71,6 +71,7 @@
         width: 100px;
         display: flex;
         justify-content: space-between;
+        margin-top: 20px;
     }
 
     #slider {
@@ -307,7 +308,9 @@
         display: block;
 
         &>.teacher_profile{
-            width: 100%;
+            width: fit-content;
+            margin: 0 auto;
+            text-align: center;
         }
 
         &>.teacher_lectures {
@@ -353,5 +356,11 @@
 
     #all_teachers_container{
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    #add_lectures_droplist{
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
     }
 }

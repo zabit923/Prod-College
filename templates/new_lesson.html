@@ -50,13 +50,13 @@
                 {% csrf_token %}
                 <input type="text" name="title" placeholder="Название лекции">
                 <div class="ckeditor">{{ form.media }}{{ form.description }}</div>
-                {{ form.media }}{{ form.description }}
-                {{ form.facult.label_tag }} {{ form.facult }}
-                {{ form.course.label_tag }} {{ form.course }}
-                {{ form.group.label_tag }} {{ form.group }}
-                <button>Опубликовать</button>
+                <div class="add_lectures_droplist" id="add_lectures_droplist">
+                    {{ form.facult.label_tag }} {{ form.facult }}
+                    {{ form.course.label_tag }} {{ form.course }}
+                    {{ form.group.label_tag }} {{ form.group }}
+                </div>
+                <button class="publish_lecture">Опубликовать</button>
             </form>
-            <button class="publish_lecture">Опубликовать</button>
         </main>
     {% else %}
         <h1>Ты не преподаватель!</h1>

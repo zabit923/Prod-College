@@ -61,6 +61,7 @@
     align-items: start;
 
     &>.teacher_profile{
+        width: fit-content;
 
         .input-file {
             position: relative;
@@ -179,3 +180,8 @@
     }
 }
 
+
+.teacher_profile_droplist{
+    @include flex();
+    width: 200px;
+}
