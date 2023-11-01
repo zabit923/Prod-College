@@ -1,11 +1,12 @@
 from django.contrib import admin
-
+from django.contrib.auth.admin import UserAdmin
 from .models import User, Facult, Course, TeacherLink, Group
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'course', 'is_teacher')
+    exclude = ('email', 'user_permissions', 'groups', 'date_joined', 'last_login')
 
 
 @admin.register(Facult)

@@ -28,7 +28,7 @@ class UserLoginForm(AuthenticationForm):
 
 
 class LinkForm(forms.ModelForm):
-    facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Факультет')
+    facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Специальность')
     course = forms.ModelChoiceField(queryset=Course.objects.all(), label='Курс')
     group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Группа')
     link = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}), label='Ссылка')
@@ -52,7 +52,7 @@ class UserProfileForm(UserChangeForm):
 
 
 class LectureForm(forms.ModelForm):
-    facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Факультет')
+    facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Специальность')
     course = forms.ModelChoiceField(queryset=Course.objects.all(), label='Курс')
     group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Группа')
     description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
