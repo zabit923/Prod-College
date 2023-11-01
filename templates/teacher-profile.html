@@ -63,6 +63,10 @@
                     {% if lectures %}
                         {% for lecture in lectures %}
                             <ul style="grid-template-columns: repeat(1, 1fr);" class="all_lectures">
+                                <p>
+                                    <strong>Направление:</strong> {{ lecture.facult }} {{ lecture.course }}
+                                    {% if lecture.group %} {{ lecture.group }} {% endif %}
+                                </p>
                                 <li style="max-height: 200px; overflow: hidden;" class="lecture">
                                     <button><a href="{% url 'users:delete_lecture' lecture.pk %}">&#10006;</a></button>
                                     <h1 style="line-height: 0.9;">{{ lecture.title }}</h1>

@@ -20,10 +20,12 @@ class UserLoginForm(AuthenticationForm):
         'class': 'form-control py-4', 'placeholder': 'Введите фамилию'}))
     student_id = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4', 'placeholder': 'Введите номер зачетной книжки'}))
+    is_teacher = forms.BooleanField(required=False, initial=False,
+                                    widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'student_id')
+        fields = ('first_name', 'last_name', 'student_id', 'is_teacher')
 
 
 
