@@ -15,11 +15,11 @@ from lessons.models import Lecture
 
 class UserLoginForm(AuthenticationForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4', 'placeholder': 'Введите имя'}))
+        'class': 'form-control py-4'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4', 'placeholder': 'Введите фамилию'}))
+        'class': 'form-control py-4'}))
     student_id = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4', 'placeholder': 'Введите номер зачетной книжки'}))
+        'class': 'form-control py-4'}))
     is_teacher = forms.BooleanField(required=False, initial=False,
                                     widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 

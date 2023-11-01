@@ -10877,3 +10877,23 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
     background-color: #e9ecef;
 }
+
+.form-check{
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    position: relative;
+    height: 30px;
+}
+
+.form-check label{
+    position: absolute;
+    top: 0;
+    left: 45px;
+}
+
+.form-check input{
+    position: absolute;
+    top: 7px;
+    left: 15px;
+}

@@ -15,6 +15,24 @@ const main = document.querySelector('main');
 const footer = document.querySelector('footer');
 const slider = document.getElementById('slider');
 
+
+
+const isTeacherCheckbox = document.getElementById('is_teacher_chexbox');
+const loginLastName = document.getElementById('login_last_name');
+
+isTeacherCheckbox.addEventListener('change', function() {
+    if (isTeacherCheckbox.checked) {
+        loginLastName.innerText = 'Отчество';
+    } else {
+        loginLastName.innerText = 'Фамилия';
+    }
+});
+
+
+
+
+///////////////////////////////////////////////////////////////////
+
 burgerBtn.addEventListener('click', () => {
     headerMenu.classList.toggle('active');
 
@@ -61,3 +79,5 @@ if (window.innerWidth < 767) {
 }
 
 //  ////////////////////////////////////////////////////////////////////
+
+
