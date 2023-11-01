@@ -27,25 +27,25 @@
             color: rgb(71, 71, 70);
         }
 
-        &>button{
-            @include button();
-            background-color: black;
-            border-radius: 10px;
-            margin-top: 10%;
-            transition: all .3s ease;
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
+        &>a{
+            @include font(16px, 16px, 500);
+            color: white;
 
-            &>a{
-                @include font(16px, 16px, 500);
-                color: white;
+            &>button{
+                @include button();
+                background-color: black;
+                border-radius: 10px;
+                margin-top: 10%;
+                transition: all .3s ease;
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+
+                &:hover{
+                    background-color: #0accee;
+                }
+    
             }
-
-            &:hover{
-                background-color: #0accee;
-            }
-        }
-
+        }   
     }
 }

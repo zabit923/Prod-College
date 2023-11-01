@@ -671,8 +671,20 @@ body {
     font-family: "Inter", sans-serif;
     line-height: 44px;
   }
+  #one_lecture_date {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+    line-height: 44px;
+  }
   #one_news_desc {
     font-size: 16px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    line-height: 21px;
+  }
+  #one_lecture_desc {
+    font-size: 24px;
     font-weight: 500;
     font-family: "Inter", sans-serif;
     line-height: 21px;
@@ -893,6 +905,20 @@ body {
   font-family: "Inter", sans-serif;
   line-height: 39px;
 }
+.one_news_main > .one_news > .one_lecture_date {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 44px;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  line-height: 39px;
+}
 .one_news_main > .one_news > .one_news_desc {
   width: -moz-fit-content;
   width: fit-content;
@@ -903,7 +929,17 @@ body {
   font-family: "Inter", sans-serif;
   line-height: 30px;
   color: #0accee;
-  padding-left: 2%;
+}
+.one_news_main > .one_news > .one_lecture_desc {
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 44px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  line-height: 30px;
+  color: #0accee;
 }
 .one_news_main > .one_news > .one_news_par {
   font-size: 20px;
@@ -1312,7 +1348,14 @@ textarea::-webkit-scrollbar-thumb {
   margin-top: 20px;
   color: rgb(71, 71, 70);
 }
-.schedule_container > li > button {
+.schedule_container > li > a {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  line-height: 16px;
+  color: white;
+}
+.schedule_container > li > a > button {
   width: 170px;
   height: 54px;
   background-color: rgb(14, 14, 14);
@@ -1331,14 +1374,7 @@ textarea::-webkit-scrollbar-thumb {
   bottom: 10px;
   left: 10px;
 }
-.schedule_container > li > button > a {
-  font-size: 16px;
-  font-weight: 500;
-  font-family: "Inter", sans-serif;
-  line-height: 16px;
-  color: white;
-}
-.schedule_container > li > button:hover {
+.schedule_container > li > a > button:hover {
   background-color: #0accee;
 }
 
@@ -1419,7 +1455,7 @@ textarea::-webkit-scrollbar-thumb {
   font-size: 24px;
   font-weight: 500;
   font-family: "Inter", sans-serif;
-  line-height: 16px;
+  line-height: 28px;
   margin-top: 10%;
 }
 .all_teachers_container > li > button {

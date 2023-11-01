@@ -293,8 +293,16 @@
         @include font(10px, 44px, 400);
     }
 
+    #one_lecture_date{
+        @include font(18px, 44px, 400);
+    }
+
     #one_news_desc {
         @include font(16px, 21px, 500);
+    }
+
+    #one_lecture_desc{
+        @include font(24px, 21px, 500);
     }
 
     #one_news_par {

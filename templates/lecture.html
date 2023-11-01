@@ -49,8 +49,8 @@
 
     <main class="one_news_main">
         <div style="width: 70%;" class="one_news">
-            <h1 style="position: relative;" class="one_news_date" id="one_news_date">{{ lecture.created_at|date:"d.m.Y" }}</h1>
-            <h2 class="one_news_desc" id="one_news_desc">{{ lecture.title }}</h2>
+            <h1 style="position: relative;" class="one_lecture_date" id="one_lecture_date">{{ lecture.created_at|date:"d.m.Y" }}</h1>
+            <h2 class="one_lecture_desc" id="one_lecture_desc">{{ lecture.title }}</h2>
             <p class="one_news_par" id="one_news_par">{{ lecture.description|safe }}</p>
         </div>
     </main>

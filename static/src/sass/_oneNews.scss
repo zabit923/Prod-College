@@ -24,13 +24,31 @@
             @include font(14px, 39px, 400);
         }
 
+        &>.one_lecture_date{
+            @include size(fit-content, 44px);
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            @include font(24px, 39px, 400);
+        }
+        
+
         &>.one_news_desc{
             width: fit-content;
             text-align: center;
             padding-top: 20px;
             @include font(24px, 30px, 500);
             color: #0accee;
-            padding-left: 2%;
+        }
+
+        &>.one_lecture_desc{
+            width: fit-content;
+            text-align: center;
+            padding-top: 20px;
+            @include font(44px, 30px, 500);
+            color: #0accee;
         }
 
         &>.one_news_par{
