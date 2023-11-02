@@ -19,17 +19,20 @@ const slider = document.getElementById('slider');
 
 const isTeacherCheckbox = document.getElementById('is_teacher_chexbox');
 const loginLastName = document.getElementById('login_last_name');
+const loginPassword = document.getElementById('login_password');
 
 isTeacherCheckbox.addEventListener('change', function() {
     if (isTeacherCheckbox.checked) {
         loginLastName.innerText = 'Отчество';
+        loginPassword.innerText = 'Пароль'
     } else {
         loginLastName.innerText = 'Фамилия';
+        loginPassword.innerText = 'Номер зачетной книжки'
     }
     if (isTeacherCheckbox.checked) {
-        login_student_id.innerText = 'Пароль';
+        login_password.innerText = 'Пароль';
     } else {
-        login_student_id.innerText = 'Номер зачетной книжки';
+        login_password.innerText = 'Номер зачетной книжки';
     }
 });
 
