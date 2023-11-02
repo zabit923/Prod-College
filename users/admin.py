@@ -32,3 +32,5 @@ class TeacherLinkAdmin(admin.ModelAdmin):
         return f"Ссылка для {obj.course} от {obj.teacher}"
 
     formatted_link.short_description = 'Link'
+
+

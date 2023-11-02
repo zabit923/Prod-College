@@ -45,7 +45,6 @@ class UserProfileView(UpdateView):
                                               'group': user.group})
         else:
             context['links'] = TeacherLink.objects.filter(faculty=user.facult, course=user.course, group=user.group)
-        context['all_rpd'] = RPD.objects.filter(course=user.course, facult=user.facult)
         context['schedules'] = Schedules.objects.filter(facult=user.facult, course=user.course, group=user.group)
         return context
 

@@ -55,6 +55,11 @@
   cursor: pointer;
   color: #fff;
 }
+
+.obama{
+    font-family: "Inter", sans-serif;
+}
+
 .header_content > .header_navbar > .nav_right_path > .right_path_logos {
   display: flex;
   justify-content: space-between;

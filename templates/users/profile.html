@@ -38,16 +38,6 @@
                                     изображение</label>
                             </div>
                         </div>
-                        {% for rpd in all_rpd %}
-                            <a style="margin: 10px;" href="{{ rpd.rpd.url }}">РПД</a>
-                        {% endfor %}
-                        {% if user.is_teacher %}
-                            <a style="margin: 10px;" href="/media/20220810-г4.pdf">ФОС</a>
-                        {% endif %}
-                        {% for schedule in schedules %}
-                            <a style="margin: 10px;" href="{{ schedule.schedule.url }}">Расписание</a>
-                        {% endfor %}
-                        <a style="margin: 10px;" href="https://urait.ru/">Юрайт</a>
                     </div>
                     <div class="form-row">
                         <div class="col-lg-12" style="margin-top: 33px;">

@@ -26,6 +26,11 @@ isTeacherCheckbox.addEventListener('change', function() {
     } else {
         loginLastName.innerText = 'Фамилия';
     }
+    if (isTeacherCheckbox.checked) {
+        login_student_id.innerText = 'Пароль';
+    } else {
+        login_student_id.innerText = 'Номер зачетной книжки';
+    }
 });
 
 
