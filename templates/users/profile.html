@@ -44,7 +44,6 @@
                             <button class="btn_important_links" id="btn_important_links">Важные ссылки</button>
                             <ul class="drop_down_link_list" id="drop_down_link_list"></ul>
                         </div>
-                        {% if user.is_teacher %}
                         <div class='important_link_add'>
                             <button class="btn_add_link" id="btn_add_link">Добавить ссылку</button>
                             <div class="add_link" id="add_link">
@@ -53,6 +52,11 @@
                                 <button class="publish_link" id="publish_link">Опубликовать</button>
                             </div>
                         </div>
+                    <div>
+                        {% if not user.is_teacher %}
+                            {% for schedule in schedules %}
+                                <a style="margin: 10px;" href="{{ schedule.schedule.url }}">Расписание</a>
+                            {% endfor %}
                         {% endif %}
                     </div>
                     <div class="form-row">
@@ -69,21 +73,21 @@
                 <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% if user.is_teacher %}
-                    <div>
-                        <ul class="teacher_profile_droplist">
-                            <li>{{ form.link_form.facult.label_tag }}</li>
-                            <li>{{ form.link_form.facult }}</li>
-                        </ul>
-                        <ul class="teacher_profile_droplist">
-                            <li>{{ form.link_form.course.label_tag }}</li>
-                            <li>{{ form.link_form.course }}</li>
-                        </ul>
-                        <ul class="teacher_profile_droplist">
-                            <li>{{ form.link_form.group.label_tag }}</li>
-                            <li>{{ form.link_form.group }}</li>
-                        </ul>
-                        <ul>{{ form.link_form.link.label_tag }} {{ form.link_form.link }}</ul>
-                    </div>
+                        <div>
+                            <ul class="teacher_profile_droplist">
+                                <li>{{ form.link_form.facult.label_tag }}</li>
+                                <li>{{ form.link_form.facult }}</li>
+                            </ul>
+                            <ul class="teacher_profile_droplist">
+                                <li>{{ form.link_form.course.label_tag }}</li>
+                                <li>{{ form.link_form.course }}</li>
+                            </ul>
+                            <ul class="teacher_profile_droplist">
+                                <li>{{ form.link_form.group.label_tag }}</li>
+                                <li>{{ form.link_form.group }}</li>
+                            </ul>
+                            <ul>{{ form.link_form.link.label_tag }} {{ form.link_form.link }}</ul>
+                        </div>
                         <div class="form-row">
                             <div class="col-lg-12" style="margin-top: 33px;">
                                 <input style="margin-bottom: 40px;" class="btn btn-info btn-block" type="submit" value="Отправить">

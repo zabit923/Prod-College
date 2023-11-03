@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Facult, Course, TeacherLink, Group
+from .models import User, Facult, Course, TeacherLink, Group, PersonalTeacherLinks
 
 
 @admin.register(User)
@@ -34,3 +34,11 @@ class TeacherLinkAdmin(admin.ModelAdmin):
     formatted_link.short_description = 'Link'
 
 
+@admin.register(PersonalTeacherLinks)
+class PersonalLink(admin.ModelAdmin):
+    list_display = ('formatted_link',)
+
+    def formatted_link(self, obj):
+        return f"Ссылка {obj.title} для {obj.teacher}"
+
+    formatted_link.short_description = 'Link'
