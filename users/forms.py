@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.utils.timezone import now
 
-from .models import User, TeacherLink, Facult, Course, Group
+from .models import User, TeacherLink, Facult, Course, Group, PersonalTeacherLinks
 from lessons.models import Lecture
 
 
@@ -35,12 +35,22 @@ class LinkForm(forms.ModelForm):
         fields = ('link', 'course', 'link')
 
 
+class PersonalLinkForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'placeholder': 'Название'}))
+    link = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'placeholder': 'Ссылка'}))
+
+    class Meta:
+        model = PersonalTeacherLinks
+        fields = ('title', 'link')
+
+
 class UserProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'custom-file-input'}), required=False)
 
     link_form = LinkForm()
+    personal_link_form = PersonalLinkForm()
 
     class Meta:
         model = User

@@ -75,7 +75,7 @@ class TeacherLink(models.Model):
 class PersonalTeacherLinks(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    link = models.URLField()
+    link = models.CharField()
 
     class Meta:
         verbose_name = 'Персональная ссылка'

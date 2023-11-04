@@ -5,8 +5,8 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
-from .forms import UserLoginForm, UserProfileForm, LectureForm, LinkForm
-from .models import User, Course, TeacherLink
+from .forms import UserLoginForm, UserProfileForm, LectureForm, LinkForm, PersonalLinkForm
+from .models import User, Course, TeacherLink, PersonalTeacherLinks
 from lessons.models import Lecture, Schedules, RPD
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
@@ -17,10 +17,10 @@ from django.views.generic.detail import DetailView
 def login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
+        first_name: str = request.POST['first_name']
+        last_name: str = request.POST['last_name']
         student_id = request.POST['student_id']
-        user = auth.authenticate(first_name=first_name, last_name=last_name, student_id=student_id)
+        user = auth.authenticate(first_name=first_name.title().strip(), last_name=last_name.title().strip(), student_id=student_id)
         if user:
             auth.login(request, user)
             return HttpResponseRedirect(reverse('users:profile', args=[request.user.pk]))
@@ -43,6 +43,7 @@ class UserProfileView(UpdateView):
         if user.is_teacher:
             context['form'] = UserProfileForm(instance=user, initial={'facult': user.facult, 'course': user.course,
                                               'group': user.group})
+            context['personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user)
         else:
             context['links'] = TeacherLink.objects.filter(faculty=user.facult, course=user.course, group=user.group)
         context['schedules'] = Schedules.objects.filter(facult=user.facult, course=user.course, group=user.group)
@@ -68,6 +69,24 @@ class UserProfileView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.object.id,))
+
+
+def add_personal_link(request):
+    if request.method == 'POST':
+        form = PersonalLinkForm(request.POST)
+        if form.is_valid():
+            teacher = request.user
+            title = form.cleaned_data['title']
+            link = form.cleaned_data['link']
+            if link.startswith('http://') or link.startswith('https://'):
+                personal_link = PersonalTeacherLinks(teacher=teacher, title=title, link=link)
+                personal_link.save()
+                return redirect('users:profile', pk=teacher.pk)
+            else:
+                messages.error(request, 'Пожалуйста, введите корректную ссылку (начиная с "http://" или "https://").')
+
+        return redirect('users:profile', pk=teacher.pk)
+
 
 
 class TeacherProfile(TemplateView):
