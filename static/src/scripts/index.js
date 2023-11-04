@@ -8,14 +8,8 @@ import adaptiveSlider from "../utils/adaptive-slider.js";
 const linksDropdown = document.getElementById('drop_down_link_list'),
       btnDropdown = document.getElementById('btn_important_links'),
       addLink = document.getElementById('add_link'),
-      btnAddLink = document.getElementById('btn_add_link'),
-      publishLink = document.getElementById('publish_link'),
-      linkNameInput = document.getElementById('add_link_name'),
-      linkUrlInput = document.getElementById('add_link_url');
+      btnAddLink = document.getElementById('btn_add_link');
 
-
-
-const allLinks = [];
 
 
 document.addEventListener('click', (e) => {
@@ -29,7 +23,7 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-	if( e.keyCode == 27 ){ // код клавиши Escape, но можно использовать e.key
+	if( e.keyCode == 27 ){ // код клавиши Escape
 		linksDropdown.classList.remove('active');
         addLink.classList.remove('active');
 	}
@@ -37,56 +31,30 @@ document.addEventListener('keydown', (e) => {
 
 btnAddLink.addEventListener('click', (event) => {
     event.preventDefault();
+
     addLink.classList.toggle('active');
 })
 
 btnDropdown.addEventListener('click', (event) => {
-
-
     event.preventDefault();
+
     linksDropdown.classList.toggle('active');
-})
-
-publishLink.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    const linkName = linkNameInput.value;
-    const linkUrl = linkUrlInput.value;
-
-
-    if (linkName && linkUrl) {
-        allLinks.push({ name: linkName, url: linkUrl });
-
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.setAttribute('href', linkUrl);
-        a.innerHTML = linkName;
-        li.prepend(a)
-        linksDropdown.append(li);
-
-        linkNameInput.value = '';
-        linkUrlInput.value = '';
-
-        updateLastListItemStyle()
-    } else {
-        alert('Заполните все поля перед публикацией.');
-    }
 })
 
 function updateLastListItemStyle() {
     const allListItems = document.querySelectorAll('.drop_down_link_list li');
 
     if (allListItems.length > 0) {
-        // Устанавливаем стиль для всех li, кроме последнего
         for (let i = 0; i < allListItems.length - 1; i++) {
             allListItems[i].style.borderBottom = '1px solid black';
         }
 
-        // Убираем бордер у последнего li
         allListItems[allListItems.length - 1].style.border = 'none';
     }
     return
 }
+
+updateLastListItemStyle();
 
 
 //BURGER MENU////////////////////////////////////////////////////////////////////

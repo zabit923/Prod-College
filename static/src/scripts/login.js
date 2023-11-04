@@ -1,8 +1,3 @@
-import { updateSlider } from "../utils/slider.js";
-import adaptiveSlider from "../utils/adaptive-slider.js";
-
-
-
 const isTeacherCheckbox = document.getElementById('is_teacher_chexbox');
 const loginLastName = document.getElementById('login_last_name');
 const loginPassword = document.getElementById('login_password');

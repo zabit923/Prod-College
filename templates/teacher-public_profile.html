@@ -64,8 +64,13 @@
                         <ul style="grid-template-columns: repeat(1, 1fr);" class="all_lectures">
                             <li style="max-height: 200px; overflow: hidden;" class="lecture">
                                 <h1 style="line-height: 0.9;">{{ lecture.title }}</h1>
-                                <p><button style="margin-top: 10px; background: #0E0E0E; border: 5; border-color: transparent;"><b><a style="color: #fff" href="{% url 'users:lecture_detail' lecture.pk %}">Подробнее</a></b>
-                                </button></p>
+                                <p>
+                                    <button style="margin-top: 10px; background: #0E0E0E; border: 5; border-color: transparent;">
+                                        <b>
+                                            <a style="color: #fff" href="{% url 'users:lecture_detail' lecture.pk %}">Подробнее</a>
+                                        </b>
+                                    </button>
+                                </p>
                             </li>
                         </ul>
                     {% endfor %}
