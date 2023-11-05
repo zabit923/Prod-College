@@ -56,6 +56,19 @@
                         <h1>{{ teacher.first_name }}</h1>
                         <h2>{{ teacher.last_name }}</h2>
                     </div>
+                        <div style="margin-bottom: 20px;" class="important_link_teacher_profile">
+                            <div class='important_link_list_teacher_profile'>
+                                <button class="btn_important_links_teacher_profile" id="btn_important_links">Важные ссылки</button>
+                                <ul class="drop_down_link_list" id="drop_down_link_list">
+                                    {% for link in personal_links %}
+                                    <li>
+                                        <a href="{{ link.link }}">{{ link.title }}</a>
+                                        <div class="dropdown_krestik">&#10006;</div>    
+                                    </li>
+                                    {% endfor %}
+                                   </ul>
+                            </div>
+                        </div>
                 </div>
                 <div class="teacher_lectures">
                     <h1>Учебные материалы</h1>
@@ -90,6 +103,6 @@
     {% endif %}
     
     <script type="module" src="{% static 'src/utils/teacher-ava.js' %}"></script>
-    <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
+    <script type="module" src="{% static 'src/scripts/teacher-profile-dropdown.js' %}"></script>
 </body>
 </html>

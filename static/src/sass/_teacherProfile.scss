@@ -328,3 +328,86 @@
     }
 }
 
+
+
+.important_link_teacher_profile {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+    &>.important_link_list_teacher_profile {
+        width: 100%;
+        position: relative;
+
+        &>.btn_important_links_teacher_profile {
+            margin-top: 20px;
+            background-color: #17a2b8;
+            color: #FFF;
+            border: none;
+            outline: none;
+            @include size(100%, 40px);
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        &>.drop_down_link_list {
+            margin-top: 10px;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.5s ease-in-out;
+            z-index: 1;
+            position: absolute;
+            width: 100%;
+            margin-bottom: 0;
+            background: var(--bg-popup-default, #FFF);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.20);
+            display: flex;
+            flex-direction: column;
+
+            &.active {
+                transform: scaleY(1);
+                transition: transform 0.5s ease-in-out;
+                border-radius: 7px;
+                height: 242px;
+                overflow-y: scroll;
+
+                //Стилизация скроллбара
+                &::-webkit-scrollbar {
+                    width: 10px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgb(0, 0, 0);
+                    border-radius: 20px;
+                    border: 3px solid rgb(255, 255, 255);
+                }
+            }
+
+            &>li {
+                padding: 20px;
+                border-bottom: 1px solid black;
+                text-align: left;
+                @include flex();
+
+                &>a {
+                    color: #0e0e0e;
+                    @include font(24px, 24px, 400);
+                    text-decoration: none;
+                }
+
+                &>.actions_with_links {
+                    display: flex;
+                    gap: 10px;
+
+
+                    &>.dropdown_krestik,
+                    .dropdown_edit {
+                        cursor: pointer;
+                    }
+                }
+
+
+            }
+        }
+    }
+}
