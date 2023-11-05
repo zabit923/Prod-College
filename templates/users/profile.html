@@ -65,8 +65,10 @@
                                 <ul class="drop_down_link_list" id="drop_down_link_list">
                                     {% for link in personal_links %}
                                     <li>
-                                        <a href="{{ link.link }}">{{ link.title }}</a>
-                                        <div class="dropdown_krestik">&#10006;</div>    
+                                        <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
+                                        <div class="actions_with_links">
+                                            <div class="dropdown_krestik"><a style="text-decoration: none;" href="{% url 'users:delete_personal_link' link.pk %}">&#10006;</a></div>
+                                        </div>
                                     </li>
                                     {% endfor %}
                                 </ul>
