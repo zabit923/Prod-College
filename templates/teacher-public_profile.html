@@ -55,6 +55,21 @@
                     <h1>{{ teacher.first_name }}</h1>
                     <h2>{{ teacher.last_name }}</h2>
                 </div>
+                <div style="margin-bottom: 20px;" class="important_link">
+                    <div class='important_link_list'>
+                        <button class="btn_important_links" id="btn_important_links">Важные ссылки</button>
+                        <ul class="drop_down_link_list" id="drop_down_link_list">
+                            {% for link in personal_links %}
+                            <li>
+                                <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
+                                <div class="actions_with_links">
+                                    <div class="dropdown_krestik"><a style="text-decoration: none;" href="{% url 'users:delete_personal_link' link.pk %}">&#10006;</a></div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="teacher_lectures">
                 <h1>Учебные материалы</h1>

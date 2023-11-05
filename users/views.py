@@ -43,7 +43,7 @@ class UserProfileView(UpdateView):
         if user.is_teacher:
             context['form'] = UserProfileForm(instance=user, initial={'facult': user.facult, 'course': user.course,
                                               'group': user.group})
-            context['personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user)
+            context['personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user).order_by('-created_at')
         else:
             context['links'] = TeacherLink.objects.filter(faculty=user.facult, course=user.course, group=user.group)
         context['schedules'] = Schedules.objects.filter(facult=user.facult, course=user.course, group=user.group)
@@ -129,6 +129,19 @@ def delete_lecture(request, lecture_id):
 
     teacher_id = request.user.pk
     profile_url = reverse('users:teacher_profile', args=(teacher_id,))
+    return redirect(profile_url)
+
+
+def delete_personal_link(request, link_id):
+    link = get_object_or_404(PersonalTeacherLinks, pk=link_id)
+    if link.teacher == request.user:
+        link.delete()
+        messages.success(request, 'Ссылка успешно удалена.')
+    else:
+        messages.error(request, 'Вы не можете удалить эту ссылку.')
+
+    teacher_id = request.user.pk
+    profile_url = reverse('users:profile', args=(teacher_id,))
     return redirect(profile_url)
 
 
