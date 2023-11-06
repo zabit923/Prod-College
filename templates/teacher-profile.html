@@ -70,7 +70,7 @@
                                 <li style="max-height: 200px; overflow: hidden;" class="lecture">
                                     <button><a href="{% url 'users:delete_lecture' lecture.pk %}">&#10006;</a></button>
                                     <h1 style="line-height: 0.9;">{{ lecture.title }}</h1>
-                                    <p><button style="background: #0E0E0E; border: 5; border-color: transparent;">
+                                    <p><button class="btn_podrobnee">
                                         <b style="margin-top: 10px; background: #0E0E0E; border: 5; border-color: transparent;"><a style="color: #fff" href="{% url 'users:lecture_detail' lecture.pk %}">Подробнее</a></b>
                                     </button></p>
                                 </li>
@@ -79,9 +79,11 @@
                     {% else %}
                         <h2>Учебных материалов нет</h2>
                     {% endif %}
-                    <button class="add_lecture">
-                        <a href="{% url 'users:add_lecture' %}">Добавить материал</a>
-                    </button>
+                    <div class="add_lecture_cont">
+                        <button class="add_lecture">
+                            <a href="{% url 'users:add_lecture' %}">Добавить материал</a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
