@@ -1,51 +1,51 @@
 @import 'core';
 
-.teacher_profile_header{
+.teacher_profile_header {
     @include size(100%, 70px);
     background-color: #0e0e0e;
     padding-top: 15px;
-    
-    &>.header_navbar{
+
+    &>.header_navbar {
         max-width: 100%;
         padding: 0 40px 0 40px;
         max-height: max-content;
         @include flex(space-between);
         margin: 0 auto;
         color: #fff;
-    
-    
-        &>.nav_left_path{
-    
-            &>h1{
+
+
+        &>.nav_left_path {
+
+            &>h1 {
                 @include font(20px, 30px, 500);
                 cursor: pointer;
             }
         }
-    
-    
-        &>.nav_right_path{
+
+
+        &>.nav_right_path {
             @include flex(space-between);
             width: 39%;
-    
-            &>li a{
+
+            &>li a {
                 @include font(16px, 26px, 500);
                 cursor: pointer;
                 transition: all .3s ease;
                 color: #fff;
-    
-                &:hover{
+
+                &:hover {
                     color: #0accee;
                 }
-                
+
             }
-    
-            &>.right_path_logos{
+
+            &>.right_path_logos {
                 @include flex(space-between);
                 width: 60px;
                 padding-top: 5px;
                 gap: 10px;
-    
-                &>a img{
+
+                &>a img {
                     width: 30px;
                 }
             }
@@ -53,14 +53,14 @@
     }
 }
 
-.teacher_container{
+.teacher_container {
     @include size(60%, max-content);
     margin: 0 auto;
     margin-top: 5%;
     @include flex();
     align-items: start;
 
-    &>.teacher_profile{
+    &>.teacher_profile {
         width: fit-content;
 
         .input-file {
@@ -68,14 +68,14 @@
             display: block;
             height: max-content;
             width: 250px;
-        
+
             &>.edit {
                 position: absolute;
                 right: 3px;
                 bottom: -10px;
                 cursor: pointer;
             }
-        
+
             &>input[type=file] {
                 position: absolute;
                 z-index: 1;
@@ -85,77 +85,84 @@
                 height: 0;
             }
 
-            &>img{
+            &>img {
                 @include size(230px, 100%);
                 border: 3px solid black;
             }
-            
+
         }
 
 
-        &>.teacher_name{
+        &>.teacher_name {
 
-            &>h1,h2,h3{
+            &>h1,
+            h2,
+            h3 {
                 @include font(36px, 46px, 400);
             }
 
-            &>h1{
+            &>h1 {
                 margin-top: 10px;
             }
         }
     }
 
-    &>.teacher_lectures{
+    &>.teacher_lectures {
         width: 70%;
 
-        &>h1{
+        &>h1 {
             @include font(48px, 58px, 500);
             text-align: center;
             color: #0accee;
         }
 
-        &>.teacher_line{
+        &>.teacher_line {
             @include size(100px, 2px);
             margin: 0 auto;
             margin-top: 10px;
             background-color: #0e0e0e;
         }
 
-        &>h2{
+        &>h2 {
             @include font(75px, 70px, 400);
             text-align: center;
             margin-top: 30px;
         }
 
-        &>.add_lecture{
-            @include button();
-            margin: 0 40%;
-            margin-top: 70px;
-            width: 200px;
-            margin-bottom: 50px;
-            padding: 0;
-            cursor: pointer;
+        &>.add_lecture_cont {
+            display: flex;
+            justify-content: center;
 
-            &>a{
-                @include font(16px, 50px, 500);
-                color: white;
-                display: block;
-                width: 100%; 
-                height: 100%;
-                text-align: center;
-                text-decoration: none;
+            .add_lecture {
+                @include button();
+                margin: 0 auto;
+                margin-top: 70px;
+                width: 200px;
+                margin-bottom: 50px;
+                padding: 0;
+                cursor: pointer;
+
+                &>a {
+                    @include font(16px, 50px, 500);
+                    color: white;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                    text-decoration: none;
+                }
             }
         }
-        
 
-        &>.all_lectures{
+
+        &>.all_lectures {
             width: 100%;
             display: grid;
             gap: 20px;
             grid-template-columns: repeat(2, 1fr);
             margin-top: 20px;
 
-            &>.lecture{
+            &>.lecture {
                 padding: 10px;
                 height: max-content;
                 background: var(--bg-popup-default, #FFF);
@@ -163,7 +170,7 @@
                 border-radius: 10px;
                 position: relative;
 
-                &>button{
+                &>button {
                     background-color: #FFF;
                     border: none;
                     cursor: pointer;
@@ -173,16 +180,27 @@
                     top: 0;
                 }
 
-                &>h1{
+                &>h1 {
                     @include font(24px, 16px, 500);
                 }
 
-                &>p{
+                &>p {
                     margin-top: 2%;
                     @include font(16px, 24px, 400);
 
-                    &>a{
+                    &>.btn_podrobnee{
+                        background-color: #000000;
+                        color: #FFF;
+                        border: none;
+                        outline: none;
+                        cursor: pointer;
+                        @include size(100px, 25px);
+                        border-radius: 9px;
+                    }
+
+                    &>a {
                         color: #0accee;
+                        @include font(14px, 14px, 400);
                     }
                 }
             }
@@ -191,21 +209,21 @@
 }
 
 
-.teacher_profile_droplist{
+.teacher_profile_droplist {
     @include flex();
     width: 200px;
 }
 
-.important_link{
+.important_link {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 
-    &>.important_link_list{
+    &>.important_link_list {
         width: 100%;
         position: relative;
 
-        &>.btn_important_links{
+        &>.btn_important_links {
             background-color: #17a2b8;
             color: #FFF;
             border: none;
@@ -214,7 +232,7 @@
             border-radius: 5px;
         }
 
-        &>.drop_down_link_list{
+        &>.drop_down_link_list {
             margin-top: 10px;
             transform: scaleY(0);
             transform-origin: top;
@@ -228,7 +246,7 @@
             display: flex;
             flex-direction: column;
 
-            &.active{
+            &.active {
                 transform: scaleY(1);
                 transition: transform 0.5s ease-in-out;
                 border-radius: 7px;
@@ -237,49 +255,50 @@
 
                 //Стилизация скроллбара
                 &::-webkit-scrollbar {
-                    width: 10px; 
+                    width: 10px;
                 }
-        
+
                 &::-webkit-scrollbar-thumb {
                     background-color: rgb(0, 0, 0);
                     border-radius: 20px;
                     border: 3px solid rgb(255, 255, 255);
                 }
             }
-            
-            &>li{
+
+            &>li {
                 padding: 20px;
                 border-bottom: 1px solid black;
                 text-align: left;
                 @include flex();
-               
-                &>a{
+
+                &>a {
                     color: #0e0e0e;
                     @include font(18px, 18px, 400);
                     text-decoration: none;
                 }
 
-                &>.actions_with_links{
+                &>.actions_with_links {
                     display: flex;
                     gap: 10px;
 
 
-                    &>.dropdown_krestik, .dropdown_edit{
+                    &>.dropdown_krestik,
+                    .dropdown_edit {
                         cursor: pointer;
                     }
                 }
-                
-                
+
+
             }
         }
     }
 
-    &>.important_link_add{
+    &>.important_link_add {
         width: 100%;
         position: relative;
 
 
-        &>.btn_add_link{
+        &>.btn_add_link {
             background-color: #17a2b8;
             color: #FFF;
             border: none;
@@ -288,7 +307,7 @@
             border-radius: 5px;
         }
 
-        &>.add_link{
+        &>.add_link {
             margin-top: 10px;
             transform: scaleY(0);
             transform-origin: top;
@@ -300,7 +319,7 @@
             background: var(--bg-popup-default, #FFF);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.20);
 
-            &.active{
+            &.active {
                 transform: scaleY(1);
                 transition: transform 0.5s ease-in-out;
                 border-radius: 7px;
@@ -311,12 +330,12 @@
                 padding: 10px;
             }
 
-            &>input{
+            &>input {
                 border: none;
                 outline: none;
             }
 
-            &>.publish_link{
+            &>.publish_link {
                 background-color: #17a2b8;
                 color: #FFF;
                 border: none;
