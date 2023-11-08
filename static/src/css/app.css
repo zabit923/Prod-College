@@ -470,6 +470,7 @@ body {
   }
   #nav_right_path.active > li {
     padding: 0 20px 0 20px;
+    display: block;
     color: rgb(255, 255, 255);
     font-size: 24px;
     font-weight: 400;
@@ -481,11 +482,10 @@ body {
     color: #0accee;
   }
   #right_path_logos {
-    display: flex;
     width: 100px;
+    display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    gap: 20px;
   }
   #slider {
     width: 100%;
@@ -1216,9 +1216,7 @@ textarea::-webkit-scrollbar-thumb {
   height: 100%;
   border: 3px solid black;
 }
-.teacher_container > .teacher_profile > .teacher_name > h1,
-.teacher_container > .teacher_profile > .teacher_name h2,
-.teacher_container > .teacher_profile > .teacher_name h3 {
+.teacher_container > .teacher_profile > .teacher_name > h1, .teacher_container > .teacher_profile > .teacher_name h2, .teacher_container > .teacher_profile > .teacher_name h3 {
   font-size: 36px;
   font-weight: 400;
   font-family: "Inter", sans-serif;
@@ -1253,11 +1251,7 @@ textarea::-webkit-scrollbar-thumb {
   text-align: center;
   margin-top: 30px;
 }
-.teacher_container > .teacher_lectures > .add_lecture_cont {
-  display: flex;
-  justify-content: center;
-}
-.teacher_container > .teacher_lectures > .add_lecture_cont .add_lecture {
+.teacher_container > .teacher_lectures > .add_lecture {
   width: 170px;
   height: 54px;
   background-color: rgb(14, 14, 14);
@@ -1268,14 +1262,14 @@ textarea::-webkit-scrollbar-thumb {
   font-family: "Inter", sans-serif;
   line-height: 26px;
   border: none;
-  margin: 0 auto;
+  margin: 0 40%;
   margin-top: 70px;
   width: 200px;
   margin-bottom: 50px;
   padding: 0;
   cursor: pointer;
 }
-.teacher_container > .teacher_lectures > .add_lecture_cont .add_lecture > a {
+.teacher_container > .teacher_lectures > .add_lecture > a {
   font-size: 16px;
   font-weight: 500;
   font-family: "Inter", sans-serif;
@@ -1325,22 +1319,8 @@ textarea::-webkit-scrollbar-thumb {
   font-family: "Inter", sans-serif;
   line-height: 24px;
 }
-.teacher_container > .teacher_lectures > .all_lectures > .lecture > p > .btn_podrobnee {
-  background-color: #000000;
-  color: #FFF;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  width: 100px;
-  height: 25px;
-  border-radius: 9px;
-}
 .teacher_container > .teacher_lectures > .all_lectures > .lecture > p > a {
   color: #0accee;
-  font-size: 14px;
-  font-weight: 400;
-  font-family: "Inter", sans-serif;
-  line-height: 14px;
 }
 
 .teacher_profile_droplist {
@@ -1417,8 +1397,7 @@ textarea::-webkit-scrollbar-thumb {
   display: flex;
   gap: 10px;
 }
-.important_link > .important_link_list > .drop_down_link_list > li > .actions_with_links > .dropdown_krestik,
-.important_link > .important_link_list > .drop_down_link_list > li > .actions_with_links .dropdown_edit {
+.important_link > .important_link_list > .drop_down_link_list > li > .actions_with_links > .dropdown_krestik, .important_link > .important_link_list > .drop_down_link_list > li > .actions_with_links .dropdown_edit {
   cursor: pointer;
 }
 .important_link > .important_link_add {
