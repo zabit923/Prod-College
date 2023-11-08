@@ -73,7 +73,7 @@
         justify-content: space-between;
         margin-top: 20px;
         gap: 20px;
-        
+
     }
 
     #slider {
@@ -295,7 +295,7 @@
         @include font(10px, 44px, 400);
     }
 
-    #one_lecture_date{
+    #one_lecture_date {
         @include font(18px, 44px, 400);
     }
 
@@ -303,7 +303,7 @@
         @include font(16px, 21px, 500);
     }
 
-    #one_lecture_desc{
+    #one_lecture_desc {
         @include font(24px, 21px, 500);
     }
 
@@ -317,7 +317,7 @@
         margin-top: 5%;
         display: block;
 
-        &>.teacher_profile{
+        &>.teacher_profile {
             width: fit-content;
             margin: 0 auto;
             text-align: center;
@@ -333,44 +333,62 @@
                 color: #0accee;
             }
 
-            &>h2{
+            &>h2 {
                 @include font(45px, 50px, 400);
                 text-align: center;
                 margin-top: 30px;
             }
 
-            &>button{
+            &>button {
                 @include button();
                 margin: 0 20%;
                 margin-top: 70px;
-    
-                &>a{
+
+                &>a {
                     @include font(16px, 50px, 500);
                     color: white;
                 }
             }
+
+            &>.all_lectures>.lecture>p>#podrobnee {
+                @include size(150px, 35px);
+                font-size: 16px;
+            }
+
         }
     }
 
-    #main_blog_form{
+    #main_blog_form {
         width: 80%;
     }
 
-    #schedule_container{
+    #schedule_container {
         grid-template-columns: repeat(1, 1fr);
 
-        &>li button{
+        &>li button {
             width: 90%;
         }
     }
 
-    #all_teachers_container{
+    #all_teachers_container {
         grid-template-columns: repeat(1, 1fr);
     }
 
-    #add_lectures_droplist{
+    #add_lectures_droplist {
         display: flex;
         flex-direction: column;
         row-gap: 20px;
+    }
+
+    #schedule_content{
+        flex-direction: column;
+        width: 100%;
+        margin: 10px 0 0 0;
+        row-gap: 20px;
+        
+
+        &>h1{
+            text-align: center;
+        }
     }
 }

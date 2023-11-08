@@ -28,9 +28,7 @@
                         <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
                     {% endif %}
                     <li><a href="/news">Новости</a></li>
-                    {% if user.is_teacher %}
-                        <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
-                    {% endif %}
+                    <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
                     {% if user.is_authenticated %}
                         {% if not user.is_teacher %}
                             <li><a href="{% url 'users:blog' %}">Преподаватели</a></li>
@@ -48,7 +46,10 @@
     </header>
 
     <main>
-        <h1 class="schedule_title">Расписание занятий</h1>
+        <div class="schedule_content" id="schedule_content">
+            <h1 class="schedule_title">Расписание занятий</h1>
+            <a href="https://raspisanie.dgu.ru/">Сервис расписаний</a>
+        </div>
         {% if all_schedules %}
             <ul class="schedule_container" id="schedule_container">
                 {% for schedule in all_schedules %}
@@ -60,7 +61,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p class="schedule_title">Нет доступных расписаний</p>
+            <p class="not_schedule_title">Нет доступных расписаний</p>
         {% endif %}
     </main>
 

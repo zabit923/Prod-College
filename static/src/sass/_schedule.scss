@@ -1,9 +1,23 @@
 @import 'core';
 
-.schedule_title{
-    @include font(46px, 60px, 500);
-    text-align: center;
+.schedule_content{
+    display: flex;
+    align-items: center;
     margin-top: 2%;
+    justify-content: space-between;
+    width: 60%;
+    margin-left: auto;
+    margin-right: 40px;
+
+    &>.schedule_title{
+        @include font(46px, 46px, 500);
+    }
+
+    &>a{
+        color: #0668fc;
+        @include font(18px, 18px, 400);
+        text-decoration: underline;
+    }
 }
 
 .schedule_container{
@@ -48,4 +62,11 @@
             }
         }   
     }
+}
+
+.not_schedule_title{
+    text-align: center;
+    @include font(30px, 30px, 400);
+    margin-top: 100px;
+    color: rgb(250, 16, 36);
 }

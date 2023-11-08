@@ -82,7 +82,6 @@ def add_personal_link(request):
             link = form.cleaned_data['link']
             facult = form.cleaned_data['facult']
             course = form.cleaned_data['course']
-            group = form.cleaned_data['group']
             private = form.cleaned_data['private']
             if link.startswith('http://') or link.startswith('https://'):
                 personal_link = PersonalTeacherLinks(teacher=teacher, title=title,

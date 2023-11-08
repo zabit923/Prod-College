@@ -31,6 +31,12 @@
                             <form action="{% url 'users:login' %}" method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
+                                    <div class="form-check" style="padding: 0;">
+                                        <input style="left: 5px;" type="checkbox" id="is_teacher_chexbox" name="is_teacher_chexbox" class="form-check-label">
+                                        <label style="left: 35px;" for="is_teacher_chexbox">Преподаватель</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя</label>
                                     {{ form.first_name }}
                                 </div>
@@ -41,12 +47,6 @@
                                 <div class="form-group">
                                     <label id="login_password" class="small mb-1" for="{{ form.student_id.id_for_label }}">Номер зачетной книжки</label>
                                     {{ form.student_id }}
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input type="checkbox" id="is_teacher_chexbox" name="is_teacher_chexbox" class="form-check-label">
-                                        <label for="is_teacher_chexbox">Преподаватель</label>
-                                    </div>
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                     <input class="btn btn-primary" type="submit" value="Войти">

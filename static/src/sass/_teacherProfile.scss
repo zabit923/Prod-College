@@ -132,10 +132,10 @@
         &>.add_lecture_cont {
             display: flex;
             justify-content: center;
+            align-items: center;
 
-            .add_lecture {
+            &>.add_lecture {
                 @include button();
-                margin: 0 auto;
                 margin-top: 70px;
                 width: 200px;
                 margin-bottom: 50px;
@@ -150,6 +150,11 @@
                     height: 100%;
                     text-align: center;
                     text-decoration: none;
+                    transition: all .3s ease;
+
+                    &:hover{
+                        color: #0accee;
+                    }
                 }
             }
         }
@@ -161,6 +166,10 @@
             gap: 20px;
             grid-template-columns: repeat(2, 1fr);
             margin-top: 20px;
+
+            &>.obama{
+                @include font(18px, 18px, 400);
+            }
 
             &>.lecture {
                 padding: 10px;
@@ -188,7 +197,7 @@
                     margin-top: 2%;
                     @include font(16px, 24px, 400);
 
-                    &>.btn_podrobnee{
+                    &>#podrobnee{
                         background-color: #000000;
                         color: #FFF;
                         border: none;
