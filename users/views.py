@@ -1,5 +1,6 @@
 from django.contrib import auth, messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 from django.shortcuts import HttpResponseRedirect, render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
@@ -43,7 +44,8 @@ class UserProfileView(UpdateView):
         if user.is_teacher:
             context['form'] = UserProfileForm(instance=user, initial={'facult': user.facult, 'course': user.course,
                                               'group': user.group})
-            context['personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user).order_by('-created_at')
+            context['personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user, private=False).order_by('-created_at')
+            context['private_personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user, private=True).order_by('-created_at')
         else:
             context['links'] = TeacherLink.objects.filter(faculty=user.facult, course=user.course, group=user.group)
         context['schedules'] = Schedules.objects.filter(facult=user.facult, course=user.course, group=user.group)
@@ -78,8 +80,14 @@ def add_personal_link(request):
             teacher = request.user
             title = form.cleaned_data['title']
             link = form.cleaned_data['link']
+            facult = form.cleaned_data['facult']
+            course = form.cleaned_data['course']
+            group = form.cleaned_data['group']
+            private = form.cleaned_data['private']
             if link.startswith('http://') or link.startswith('https://'):
-                personal_link = PersonalTeacherLinks(teacher=teacher, title=title, link=link)
+                personal_link = PersonalTeacherLinks(teacher=teacher, title=title,
+                                                     link=link, facult=facult,
+                                                     course=course, private=private)
                 personal_link.save()
                 return redirect('users:profile', pk=teacher.pk)
             else:
@@ -200,10 +208,15 @@ class PublicTeacherProfile(TemplateView):
         course = self.request.user.course
         group = self.request.user.group
         teacher = User.objects.get(id=teacher_id, is_teacher=True)
-        lectures = teacher.lectures.filter(facult=facult, course=course, group=group).order_by('-created_at')
+        lectures = teacher.lectures.filter(
+            Q(facult=facult, course=course, group=group) | Q(facult=facult, course=course, group=None)
+        ).order_by('-created_at')
+        personal_links = PersonalTeacherLinks.objects.filter(teacher=teacher, facult=facult,
+                                                             course=course, private=False).order_by('-created_at')
         context = {
             'teacher': teacher,
-            'lectures': lectures
+            'lectures': lectures,
+            'personal_links': personal_links
         }
         return render(request, self.template_name, context)
 

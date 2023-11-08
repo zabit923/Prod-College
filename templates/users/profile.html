@@ -63,14 +63,36 @@
                             <div class='important_link_list'>
                                 <button class="btn_important_links" id="btn_important_links">Важные ссылки</button>
                                 <ul class="drop_down_link_list" id="drop_down_link_list">
-                                    {% for link in personal_links %}
-                                    <li>
-                                        <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
-                                        <div class="actions_with_links">
-                                            <div class="dropdown_krestik"><a style="text-decoration: none;" href="{% url 'users:delete_personal_link' link.pk %}">&#10006;</a></div>
-                                        </div>
-                                    </li>
-                                    {% endfor %}
+                                    {% if private_personal_links %}
+                                        <div style="margin: 0 auto;"><b>Только у меня</b></div>
+                                        {% for link in private_personal_links %}
+                                            <li>
+                                                <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
+                                                <div class="actions_with_links">
+                                                    <div class="dropdown_krestik">
+                                                        <a style="text-decoration: none;" href="{% url 'users:delete_personal_link' link.pk %}">
+                                                            &#10006;
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if personal_links %}
+                                        <div style="margin: 0 auto;"><b>Публичные</b></div>
+                                        {% for link in personal_links %}
+                                            <li>
+                                                <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
+                                                <div class="actions_with_links">
+                                                    <div class="dropdown_krestik">
+                                                        <a style="text-decoration: none;" href="{% url 'users:delete_personal_link' link.pk %}">
+                                                            &#10006;
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class='important_link_add'>
@@ -78,6 +100,9 @@
                                 <div class="add_link" id="add_link">
                                     <div style="border: 1px;">{{ form.personal_link_form.title }}</div>
                                     <div style="border: 1px;">{{ form.personal_link_form.link }}</div>
+                                    {{ form.personal_link_form.facult }}
+                                    {{ form.personal_link_form.course }}
+                                    <div>{{ form.personal_link_form.private }} Только у меня</div>
                                     <input type="submit" class="publish_link" value="Опубликовать">
                                 </div>
                             </div>

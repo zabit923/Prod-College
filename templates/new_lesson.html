@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{% static 'src/css/app.css' %}">
     <link rel="stylesheet" href="{% static 'src/css/reset.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'src/images/favicon.ico' %}">
 
 </head>
 <body>
@@ -48,7 +49,7 @@
     {% if user.is_teacher %}
         <main>
             <form style="width: 90%;" class="main_blog_form" method="post">
-                <h1>Ваша Лекция</h1>
+                <h1>Ваш материал</h1>
                 {% csrf_token %}
                 <input type="text" name="title" placeholder="Название лекции">
                 <div class="ckeditor">{{ form.media }}{{ form.description }}</div>

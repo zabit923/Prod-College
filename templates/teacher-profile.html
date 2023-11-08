@@ -11,6 +11,7 @@
     <title>Страница преподавателя</title>
 
     <link rel="stylesheet" href="{% static 'src/css/app.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'src/images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'src/css/reset.css' %}">
 </head>
 <body>
@@ -80,7 +81,7 @@
                         <h2>Учебных материалов нет</h2>
                     {% endif %}
                     <button class="add_lecture">
-                        <a href="{% url 'users:add_lecture' %}">Добавить материал</a>
+                        <a style="margin-bottom: 40px;" href="{% url 'users:add_lecture' %}">Добавить материал</a>
                     </button>
                 </div>
             </div>
@@ -88,8 +89,7 @@
     {% else %}
         <h1>Ты не преподаватель!</h1>
     {% endif %}
-    
-    <script type="module" src="{% static 'src/utils/teacher-ava.js' %}"></script>
-    <script type="module" src="{% static 'src/scripts/teacher-profile-dropdown.js' %}"></script>
+
+    <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
 </body>
 </html>

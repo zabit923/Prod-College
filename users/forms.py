@@ -28,7 +28,8 @@ class LinkForm(forms.ModelForm):
     facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Специальность')
     course = forms.ModelChoiceField(queryset=Course.objects.all(), label='Курс')
     group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Группа')
-    link = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}), label='Ссылка')
+    link = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'placeholder': 'Ваша ссылка'}),
+                           label='Ссылка')
 
     class Meta:
         model = TeacherLink
@@ -37,7 +38,10 @@ class LinkForm(forms.ModelForm):
 
 class PersonalLinkForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'placeholder': 'Название'}))
+    facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), required=False, label='Специальность')
+    course = forms.ModelChoiceField(queryset=Course.objects.all(), required=False, label='Курс')
     link = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'placeholder': 'Ссылка'}))
+    private = forms.BooleanField(required=False, label='Только у меня')
 
     class Meta:
         model = PersonalTeacherLinks

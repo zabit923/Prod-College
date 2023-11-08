@@ -9,11 +9,6 @@ class ScheduleAdmin(admin.ModelAdmin):
     list_display = ('facult', 'course')
 
 
-@admin.register(RPD)
-class RPDAdmin(admin.ModelAdmin):
-    list_display = ('facult', 'course')
-
-
 @admin.register(Lecture)
 class Lecture(admin.ModelAdmin):
     list_display = ('title',)

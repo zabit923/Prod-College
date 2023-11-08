@@ -51,7 +51,7 @@ class TeacherLinkAdmin(admin.ModelAdmin):
 
 @admin.register(PersonalTeacherLinks)
 class PersonalLink(admin.ModelAdmin):
-    list_display = ('formatted_link',)
+    list_display = ('formatted_link', 'private')
 
     def formatted_link(self, obj):
         return f"Ссылка {obj.title} для {obj.teacher}"

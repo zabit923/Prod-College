@@ -12,7 +12,7 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-	if( e.keyCode == 27 ){ // код клавиши Escape
+	if( e.keyCode == 27 ){
 		linksDropdown.classList.remove('active');
 	}
 });

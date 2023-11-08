@@ -75,6 +75,9 @@ class PersonalTeacherLinks(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     link = models.CharField()
+    private = models.BooleanField(default=False, null=True, blank=True)
+    facult = models.ForeignKey(Facult, null=True, blank=True, on_delete=models.CASCADE, default='')
+    course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.CASCADE, default='')
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
