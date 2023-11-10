@@ -62,6 +62,7 @@ class TeacherLink(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default='')
     group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.CASCADE, default='')
     link = models.CharField(max_length=150, null=True, blank=False)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Ссылка для {self.course} от {self.teacher}"
@@ -78,6 +79,7 @@ class PersonalTeacherLinks(models.Model):
     private = models.BooleanField(default=False, null=True, blank=True)
     facult = models.ForeignKey(Facult, null=True, blank=True, on_delete=models.CASCADE, default='')
     course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.CASCADE, default='')
+    group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.CASCADE, default='')
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:

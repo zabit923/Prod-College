@@ -102,6 +102,7 @@
                                     <div style="border: 1px;">{{ form.personal_link_form.link }}</div>
                                     {{ form.personal_link_form.facult }}
                                     {{ form.personal_link_form.course }}
+                                    {{ form.personal_link_form.group }}
                                     <div>{{ form.personal_link_form.private }} Только у меня</div>
                                     <input type="submit" class="publish_link" value="Опубликовать">
                                 </div>
@@ -135,18 +136,42 @@
                     {% endif %}
                 </form>
                 <div style="margin-bottom: 50px;">
-                    {% if not user.is_teacher %}
-                        {% for link in links %}
-                            {% if link.link %}
-                                {% if link.link|is_link %}
-                                    <h4 class="mt-3 mb-3">{{ link.teacher }}</h4> <a href="{{ link.link }}">Ссылка на источник</a>
-                                {% else %}
-                                    <h4 class="mt-3 mb-3">{{ link.teacher }}</h4> <div
-                        style="max-width: 100%; word-wrap: break-word;">{{ link.link }}</div>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
+                <div style="margin-bottom: 50px;">
+                    {% if user.is_teacher %}
+                        <h1 style="margin-bottom: 20px;">
+                            Мои сообщения
+                        </h1>
+                    {% else %}
+                        <h1 style="margin-bottom: 20px;">
+                            Сообщения преподавателей
+                        </h1>
                     {% endif %}
+                    <div style="margin-bottom: 20px;" class="important_link">
+                        <div class='important_link_list'>
+                            <button class="btn_important_links" id="btn_important_links_">Все сообщения</button>
+                            <ul class="drop_down_link_list" id="drop_down_link_list_">
+                                {% for link in links %}
+                                    {% if link.link %}
+                                        <li>
+                                            {% if not user.is_teacher %}
+                                                <p>{{ link.teacher }}</p>
+                                                <div style="margin: 30px; max-width: 100%; word-wrap: break-word;">
+                                                    {{ link.link|format_text|safe }}
+                                                </div>
+                                            {% else %}
+                                                <div style="margin: 30px; max-width: 100%; word-wrap: break-word;">
+                                                    {{ link.link|format_text|safe }}
+                                                </div>
+                                                <a style="text-decoration: none;" href="{% url 'users:delete_link' link.pk %}">
+                                                    &#10006;
+                                                </a>
+                                            {% endif %}
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

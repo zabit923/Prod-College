@@ -57,7 +57,11 @@
 </body>
     {% block content %}
     {% endblock %}
-<script type="module" src="{% static 'src/scripts/prfl.js' %}"></script>
+{% if user.is_teacher %}
+    <script type="module" src="{% static 'src/scripts/prfl.js' %}"></script>
+{% else %}
+    <script type="module" src="{% static 'src/scripts/links.js' %}"></script>
+{% endif %}
 </html>
 
 

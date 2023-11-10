@@ -40,6 +40,7 @@ class PersonalLinkForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'placeholder': 'Название'}))
     facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), required=False, label='Специальность')
     course = forms.ModelChoiceField(queryset=Course.objects.all(), required=False, label='Курс')
+    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Группа')
     link = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'placeholder': 'Ссылка'}))
     private = forms.BooleanField(required=False, label='Только у меня')
 

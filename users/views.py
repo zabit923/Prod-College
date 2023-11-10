@@ -1,13 +1,12 @@
 from django.contrib import auth, messages
-from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
-from django.shortcuts import HttpResponseRedirect, render, get_object_or_404, redirect
+from django.shortcuts import HttpResponseRedirect, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import UpdateView
 
 from .forms import UserLoginForm, UserProfileForm, LectureForm, LinkForm, PersonalLinkForm
-from .models import User, Course, TeacherLink, PersonalTeacherLinks
+from .models import User, TeacherLink, PersonalTeacherLinks
 from lessons.models import Lecture, Schedules, RPD
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
@@ -46,8 +45,10 @@ class UserProfileView(UpdateView):
                                               'group': user.group})
             context['personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user, private=False).order_by('-created_at')
             context['private_personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user, private=True).order_by('-created_at')
+            context['links'] = TeacherLink.objects.filter(teacher=user).order_by('-created_at')
         else:
-            context['links'] = TeacherLink.objects.filter(faculty=user.facult, course=user.course, group=user.group)
+            context['links'] = TeacherLink.objects.filter(
+                Q(faculty=user.facult, course=user.course, group=user.group) | Q(faculty=user.facult, course=user.course, group=None)).order_by('-created_at')
         context['schedules'] = Schedules.objects.filter(facult=user.facult, course=user.course, group=user.group)
         return context
 
@@ -59,13 +60,8 @@ class UserProfileView(UpdateView):
             group = link_form.cleaned_data['group']
             link = link_form.cleaned_data['link']
             user = request.user
-            existing_link = TeacherLink.objects.filter(teacher=user, faculty=facult, course=course, group=group).first()
-            if existing_link:
-                existing_link.link = link
-                existing_link.save()
-            else:
-                new_link = TeacherLink(teacher=user, faculty=facult, course=course, group=group, link=link)
-                new_link.save()
+            new_link = TeacherLink(teacher=user, faculty=facult, course=course, group=group, link=link)
+            new_link.save()
 
         return super().post(request, *args, **kwargs)
 
@@ -82,11 +78,12 @@ def add_personal_link(request):
             link = form.cleaned_data['link']
             facult = form.cleaned_data['facult']
             course = form.cleaned_data['course']
+            group = form.cleaned_data['group']
             private = form.cleaned_data['private']
             if link.startswith('http://') or link.startswith('https://'):
                 personal_link = PersonalTeacherLinks(teacher=teacher, title=title,
                                                      link=link, facult=facult,
-                                                     course=course, private=private)
+                                                     course=course, group=group, private=private)
                 personal_link.save()
                 return redirect('users:profile', pk=teacher.pk)
             else:
@@ -143,6 +140,19 @@ def delete_personal_link(request, link_id):
     link = get_object_or_404(PersonalTeacherLinks, pk=link_id)
     if link.teacher == request.user:
         link.delete()
+        messages.success(request, 'Ссылка успешно удалена.')
+    else:
+        messages.error(request, 'Вы не можете удалить эту ссылку.')
+
+    teacher_id = request.user.pk
+    profile_url = reverse('users:profile', args=(teacher_id,))
+    return redirect(profile_url)
+
+
+def delete_link(request, link_id):
+    message = get_object_or_404(TeacherLink, pk=link_id)
+    if message.teacher == request.user:
+        message.delete()
         messages.success(request, 'Ссылка успешно удалена.')
     else:
         messages.error(request, 'Вы не можете удалить эту ссылку.')
@@ -210,8 +220,9 @@ class PublicTeacherProfile(TemplateView):
         lectures = teacher.lectures.filter(
             Q(facult=facult, course=course, group=group) | Q(facult=facult, course=course, group=None)
         ).order_by('-created_at')
-        personal_links = PersonalTeacherLinks.objects.filter(teacher=teacher, facult=facult,
-                                                             course=course, private=False).order_by('-created_at')
+        personal_links = PersonalTeacherLinks.objects.filter(
+            Q(facult=facult, course=course, group=group) | Q(facult=facult, course=course, group=None)
+        ).order_by('-created_at')
         context = {
             'teacher': teacher,
             'lectures': lectures,
