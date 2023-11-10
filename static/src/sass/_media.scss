@@ -391,4 +391,18 @@
             text-align: center;
         }
     }
+
+    #msg_student_cont{
+        left: 85%;
+        flex-direction: column;
+
+        &>.drop_down_msg_list_student {
+            position: absolute;
+            width: 350px;
+            left: -80%;
+            right: 10px;
+            top: 50px;
+            z-index: 999;
+        }
+    }
 }

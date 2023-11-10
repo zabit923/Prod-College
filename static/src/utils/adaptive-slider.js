@@ -4,16 +4,18 @@ const slides = document.querySelectorAll('.slide');
 let currentSlideIndex = 0;
 
 export default function adaptiveSlider() {
+    if (!prevButton || !nextButton || !slides.length) {
+        return;
+    }
 
     function showSlide(index) {
         slides.forEach((slide, i) => {
-            if (i === index) {
-                slide.style.display = 'block';
-            } else {
-                slide.style.display = 'none';
+            if (slide) {
+                slide.style.display = i === index ? 'block' : 'none';
             }
         });
     }
+    
 
     function showNextSlide() {
         currentSlideIndex = (currentSlideIndex + 1) % slides.length;
@@ -25,8 +27,10 @@ export default function adaptiveSlider() {
         showSlide(currentSlideIndex);
     }
 
-    prevButton.addEventListener('click', showPrevSlide);
-    nextButton.addEventListener('click', showNextSlide);
+    if (prevButton && nextButton) {
+        prevButton.addEventListener('click', showPrevSlide);
+        nextButton.addEventListener('click', showNextSlide);
+    }
 
     showSlide(currentSlideIndex);
 }

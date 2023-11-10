@@ -16,21 +16,30 @@ const footer = document.querySelector('footer');
 const slider = document.getElementById('slider');
 
 
-///////////////////////////////////////////////////////////////////
+//////BURGER    /////////////////////////////////////////////////////////////
 
 burgerBtn.addEventListener('click', () => {
     headerMenu.classList.toggle('active');
 
     if (headerMenu.classList.contains('active')) {
         burgerBtn.style.backgroundImage = 'url("/static/src/images/cross.png")';
-        document.body.removeChild(main);
-        document.body.removeChild(footer);
-        slider.style.display = 'none';
+        if (main && footer) {
+            document.body.removeChild(main);
+            document.body.removeChild(footer);
+        }
+
+        if (slider) {
+            slider.style.display = 'none';
+        }
     } else {
         burgerBtn.style.backgroundImage = 'url("/static/src/images/burger.svg")';
-        document.body.appendChild(main);
-        document.body.appendChild(footer);
-        slider.style.display = 'block';
+        if (main && footer) {
+            document.body.appendChild(main);
+            document.body.appendChild(footer);
+        }
+        if (slider) {
+            slider.style.display = 'block';
+        }
     }
 })
 
@@ -38,13 +47,21 @@ burgerBtn.addEventListener('click', () => {
 
 if (window.innerWidth < 767) {
     adaptiveSlider();
-    footerVK.src = "/static/src/images/newVK.svg";
-    footerTG.src = "/static/src/images/newTG.png";
-    line.style.height = 0;
+
+    if (footerVK) {
+        footerVK.src = "/static/src/images/newVK.svg";
+    }
+    if (footerTG) {
+        footerTG.src = "/static/src/images/newTG.png";
+    }
+    if (line) {
+        line.style.height = 0;
+    }
+
 } else {
-    const prevButton = document.querySelector('.prev-button');
-    const nextButton = document.querySelector('.next-button');
-    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.querySelector('.prev-button'),
+          nextButton = document.querySelector('.next-button'),
+          slides = document.querySelectorAll('.slide');
     let currentIndex = 0;
 
     function handleNextClick() {
@@ -57,12 +74,50 @@ if (window.innerWidth < 767) {
         updateSlider(slides, currentIndex);
     }
 
-    nextButton.addEventListener('click', handleNextClick);
-    prevButton.addEventListener('click', handlePrevClick);
+    if (nextButton) {
+        nextButton.addEventListener('click', handleNextClick);
+    }
+
+    if (prevButton) {
+        prevButton.addEventListener('click', handlePrevClick);
+    }
 
     updateSlider(slides, currentIndex);
 }
 
- ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+const messageDropdown = document.getElementById('drop_down_msg_list'),
+      btnStudDropdown = document.getElementById('btn_message');
+
+document.addEventListener('keydown', (e) => {
+    if (e.keyCode == 27) { // код клавиши Escape
+        messageDropdown.classList.remove('active');
+    }
+});
+
+btnStudDropdown.addEventListener('click', (event) => {
+    event.preventDefault();
+    messageDropdown.classList.toggle('active');
+});
 
 
+function updateLastListItemStyle() {
+    const allListItem1 = document.querySelectorAll('.drop_down_msg_list li'),
+          allListItem2 = document.querySelectorAll('.drop_down_msg_list_student li'),
+          allListItems = [allListItem1, allListItem2];
+
+    allListItems.forEach(el => {
+        if (el.length > 0) {
+            for (let i = 0; i < el.length - 1; i++) {
+                el[i].style.borderBottom = '1px solid black';
+            }
+    
+            el[el.length - 1].style.border = 'none';
+        }
+        return
+    })
+    
+}
+
+updateLastListItemStyle();
