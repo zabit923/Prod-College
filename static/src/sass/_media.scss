@@ -393,16 +393,20 @@
     }
 
     #msg_student_cont{
-        left: 85%;
-        flex-direction: column;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 600px;
+
+        &>.btn_message{
+            float: right;
+            margin-right: 20px;
+        }
 
         &>.drop_down_msg_list_student {
-            position: absolute;
+            position: relative;
             width: 350px;
-            left: -80%;
-            right: 10px;
-            top: 50px;
-            z-index: 999;
+            margin: 0 auto;
         }
     }
 }

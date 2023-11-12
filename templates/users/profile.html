@@ -137,7 +137,6 @@
                 </div>
                 {% endif %}
             </form>
-            <div class='important_msg_list'>
                 {% if user.is_teacher %}
                     <div class="msg_teacher_cont">
                         <button class="btn_teacher_message" id="btn_message">Мои сообщения</button>
@@ -162,7 +161,7 @@
                             {% for link in links %}
                             {% if link.link %}
                                 <li>
-                                    <p><span>Отправитель:</span> {{ link.teacher }}</p>
+                                    <p><span>Отправитель:</span> <a href="{{ link.profile_url }}">{{ link.teacher }}</a></p>
                                     <div>
                                         {{ link.link|format_text|safe }}
                                     </div>
@@ -171,7 +170,6 @@
                             {% endfor %}
                     </div>
                 {% endif %}
-            </div>
         </div>
     </div>
 </div>

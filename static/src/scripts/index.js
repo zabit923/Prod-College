@@ -96,10 +96,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-btnStudDropdown.addEventListener('click', (event) => {
-    event.preventDefault();
-    messageDropdown.classList.toggle('active');
-});
+if(btnStudDropdown){
+    btnStudDropdown.addEventListener('click', (event) => {
+        event.preventDefault();
+        messageDropdown.classList.toggle('active');
+    });
+}
 
 
 function updateLastListItemStyle() {

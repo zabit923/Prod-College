@@ -49,7 +49,7 @@
            {% for teacher in all_teachers %}
                 <li>
                    <img src="{% if teacher.image %} {{ teacher.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}" alt="">
-                    <h1>{{ teacher.first_name }}  {{ teacher.last_name }}</h1>
+                    <h1>{{ teacher.first_name }} <br> {{ teacher.last_name }}</h1>
                     <button><a href="{% url 'users:public_profile' teacher.id %}">Смотреть лекции</a></button>
                 </li>
            {% endfor %}

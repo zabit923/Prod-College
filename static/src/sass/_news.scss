@@ -70,14 +70,15 @@
 
     &>.main_news_item{
         position: relative;
-
+        
         &>img{
-            max-width: 95%;
             min-height: 311px;
             max-height: 311px;
-            border-radius: 2px
+            min-width: 100%;
+            max-width: 100%;
+            border-radius: 2px;
         }
-
+                
         &>.news_date{
             @include size(120px, 44px);
             background-color: #fff;
