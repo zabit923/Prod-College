@@ -83,6 +83,30 @@
                                     </button>
                                 </p>
                             </li>
+                            <section class="lectures_comments">
+                                <button class="show_comment" id="show_comment">Показать комментарии</button>
+                                <div class="comments_container" id="comments_container">
+                                    <div class="show_all_comments">
+                                        <div class="comment">
+                                            <img class="user_ava" src='https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'>
+                                            <div class="user_data">
+                                                <h1 class="user_name" id="user_name">Иван Иваныч</h1>
+                                                <p class="user_comment">Путин - президент мира</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="publish_comment">
+                                        <img class="my_ava" src='https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'>
+                                        <div class="my_data">
+                                            <div class="my_name_cont">
+                                                <h1 class="my_name">Name Surname</h1>
+                                                <input class="my_comment" id="my_comment" placeholder="Написать комментарий...">
+                                            </div>
+                                            <div class="publish_btn"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </ul>
                     {% endfor %}
                 {% else %}
@@ -94,5 +118,6 @@
 
     <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
     <script type="module" src="{% static 'src/scripts/teacher-profile-dropdown.js' %}"></script>
+    <script type="module" src="{% static 'src/scripts/drop_comment.js' %}"></script>
 </body>
 </html>
