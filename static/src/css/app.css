@@ -9,6 +9,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 .header_content {
   width: 100%;
   height: 824px;
@@ -1892,4 +1893,141 @@ textarea::-webkit-scrollbar-thumb {
   font-family: "Inter", sans-serif;
   line-height: 16px;
   color: white;
+}
+
+.lectures_comments > .show_comment {
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  line-height: 18px;
+  text-decoration: underline;
+  width: 250px;
+  padding: 0;
+  text-align: left;
+  color: #19c7e2;
+}
+.lectures_comments > .comments_container {
+  width: 100%;
+  height: 550px;
+  margin-top: 10px;
+  transition: transform 0.5s ease;
+  transform: scaleY(0);
+  position: absolute;
+}
+.lectures_comments > .comments_container.active {
+  transform: scaleY(1);
+  position: relative;
+  z-index: 1;
+}
+.lectures_comments > .comments_container > .show_all_comments {
+  width: 100%;
+  height: 85%;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.lectures_comments > .comments_container > .show_all_comments::-webkit-scrollbar {
+  width: 10px;
+}
+.lectures_comments > .comments_container > .show_all_comments::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  border: 3px solid rgb(255, 255, 255);
+}
+.lectures_comments > .comments_container > .show_all_comments > .comment {
+  height: -moz-max-content;
+  height: max-content;
+  display: flex;
+  gap: 20px;
+}
+.lectures_comments > .comments_container > .show_all_comments > .comment > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.lectures_comments > .comments_container > .show_all_comments > .comment > .user_data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.lectures_comments > .comments_container > .show_all_comments > .comment > .user_data > h1 {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  line-height: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.lectures_comments > .comments_container > .show_all_comments > .comment > .user_data > h1:hover {
+  color: #19c7e2;
+  text-decoration: underline;
+}
+.lectures_comments > .comments_container > .show_all_comments > .comment > .user_data > p {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  line-height: 14px;
+}
+.lectures_comments > .comments_container > .show_all_comments > .comment_line {
+  width: 100%;
+  height: 1px;
+  background-color: rgb(80, 80, 80);
+}
+.lectures_comments > .comments_container > .publish_comment {
+  background: var(--bg-popup-default, #FFF);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+.lectures_comments > .comments_container > .publish_comment > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.lectures_comments > .comments_container > .publish_comment > .my_data {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.lectures_comments > .comments_container > .publish_comment > .my_data > .my_name_cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.lectures_comments > .comments_container > .publish_comment > .my_data > .my_name_cont > h1 {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  line-height: 16px;
+}
+.lectures_comments > .comments_container > .publish_comment > .my_data > .my_name_cont > input {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  line-height: 14px;
+  height: 20px;
+  width: 90%;
+  outline: none;
+  border: none;
+}
+.lectures_comments > .comments_container > .publish_comment > .my_data > .publish_btn {
+  background-image: url("../images/publish_comment.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
 }/*# sourceMappingURL=app.css.map */

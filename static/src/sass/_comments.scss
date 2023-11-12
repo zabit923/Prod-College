@@ -1,0 +1,143 @@
+@import 'core';
+
+.lectures_comments{
+
+    &>.show_comment{
+        margin-left: 5px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        @include font(18px, 18px, 400);
+        text-decoration: underline;
+        width: 250px;
+        padding: 0;
+        text-align: left;
+        color: #19c7e2;
+    }
+
+    &>.comments_container{
+        @include size(100%, 550px);
+        margin-top: 10px;
+        transition: transform 0.5s ease;
+        transform: scaleY(0);
+        position: absolute; 
+
+        &.active {
+            transform: scaleY(1);
+            position: relative;
+            z-index: 1;
+        }
+
+        &>.show_all_comments{
+            @include size(100%, 85%);
+            overflow-y: scroll;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            row-gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            
+
+
+            //Стилизация скроллбара
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: rgb(0, 0, 0);
+                border-radius: 20px;
+                border: 3px solid rgb(255, 255, 255);
+            }       
+
+
+            &>.comment{
+                height: max-content;
+                display: flex;
+                gap: 20px;
+
+                &>img{
+                    @include size(50px, 50px);
+                    border-radius: 50%;
+                }
+
+                &>.user_data{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+
+                    &>h1{
+                        @include font(16px, 16px, 600);
+                        cursor: pointer;
+                        transition: all .3s ease;
+
+                        &:hover{
+                            color: #19c7e2;
+                            text-decoration: underline
+                        }
+                    }
+
+                    &>p{
+                        @include font(14px, 14px, 400);
+                    }
+
+                }
+            }
+
+            &>.comment_line{
+                width: 100%;
+                height: 1px;
+                background-color: rgb(80, 80, 80);
+            }
+        }
+
+        &>.publish_comment{
+            background: var(--bg-popup-default, #FFF);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.20);
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+
+
+            &>img{
+                @include size(50px, 50px);
+                border-radius: 50%;
+            }
+
+            &>.my_data{
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                &>.my_name_cont{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+
+                    &>h1{
+                        @include font(16px, 16px, 600);
+                    }
+    
+                    &>input{
+                        @include font(14px, 14px, 400);
+                        height: 20px;
+                        width: 90%;
+                        outline: none;
+                        border: none;
+                    }
+                }
+
+                &>.publish_btn{
+                    @include bg-img(url('../images/publish_comment.png'), center, cover);
+                    @include size(48px, 48px);
+                    cursor: pointer;
+                }
+
+            }
+        }
+    }
+}
