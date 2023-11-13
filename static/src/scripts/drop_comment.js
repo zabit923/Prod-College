@@ -1,24 +1,34 @@
-const showCommentBtn = document.getElementById('show_comment'),
-      allComments = document.getElementById('comments_container'),
-      userName = document.getElementById('user_name'),
-      myComment = document.getElementById('my_comment');
+document.addEventListener('DOMContentLoaded', () => {
+    const showCommentBtns = document.querySelectorAll('.show_comment');
+    const allCommentsContainers = document.querySelectorAll('.comments_container');
 
-      
-showCommentBtn.addEventListener('click', (event) => {
-    event.preventDefault();
+    showCommentBtns.forEach((btn, index) => {
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
 
-    allComments.classList.toggle('active');
+            const commentsContainer = allCommentsContainers[index];
+            commentsContainer.classList.toggle('active');
 
-    if(allComments && allComments.classList.contains('active')){
-        showCommentBtn.textContent = 'Скрыть комментарии';
-    } else{
-        showCommentBtn.textContent = 'Показать комментарии';
-    }   
-})
+            if (commentsContainer.classList.contains('active')) {
+                btn.textContent = 'Скрыть комментарии';
+            } else {
+                btn.textContent = 'Показать комментарии';
+            }
+        });
+    });
 
-userName.addEventListener('click', (event) => {
-    event.preventDefault();
+    const userNameElements = document.querySelectorAll('.user_name');
+    const myCommentElements = document.querySelectorAll('.my_comment');
 
-    myComment.value = userName.textContent + ',';
-})
+    userNameElements.forEach((userName, index) => {
+        userName.addEventListener('click', (event) => {
+            event.preventDefault();
 
+            const myComment = userName.closest('.lectures_comments').querySelector('.my_comment');
+            const review = userName.closest('.comment');
+            const commenterName = review.querySelector('.user_name').textContent.trim();
+
+            myComment.value = `${commenterName}, `;
+        });
+    });
+});

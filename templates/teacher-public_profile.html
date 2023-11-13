@@ -27,6 +27,7 @@
                         <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
                     {% endif %}
                     <li><a href="/news">Новости</a></li>
+                    <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
                     {% if user.is_teacher %}
                         <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
                     {% endif %}
@@ -83,30 +84,41 @@
                                     </button>
                                 </p>
                             </li>
-                            <section class="lectures_comments">
-                                <button class="show_comment" id="show_comment">Показать комментарии</button>
-                                <div class="comments_container" id="comments_container">
-                                    <div class="show_all_comments">
-                                        <div class="comment">
-                                            <img class="user_ava" src='https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'>
-                                            <div class="user_data">
-                                                <h1 class="user_name" id="user_name">Иван Иваныч</h1>
-                                                <p class="user_comment">Путин - президент мира</p>
+                            <form action="{% url 'users:add_review' pk=lecture.id %}" autocomplete="off" method="post">
+                                {% csrf_token %}
+                                <section class="lectures_comments">
+                                    <button class="show_comment" id="show_comment_{{ lecture.id }}">Показать комментарии ({{ lecture.get_review|length }})</button>
+                                    <div class="comments_container" id="comments_container">
+                                        <div class="show_all_comments">
+                                            {% for review in lecture.get_review %}
+                                                <div class="comment">
+                                                    <img class="user_ava" src="{% if review.name.image %}{{ review.name.image.url }}{% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
+                                                    <div class="user_data">
+                                                        <h1 style="color: #0680FD" class="user_name" id="user_name_{{ review.name.id }}">
+                                                            {{ review.name.first_name }} {{ review.name.last_name }}
+                                                        </h1><p style="font-size:14px;" class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
+                                                        <p style="margin-top: 10px;" class="user_comment">{{ review.text }}
+                                                        {% if review.name == user %}
+                                                            <a style="text-decoration: none; margin-left:10px; font-size: 18px;" href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a>
+                                                        {% endif %}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="publish_comment">
+                                            <img class="my_ava"
+                                                 src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
+                                            <div class="my_data">
+                                                <div class="my_name_cont">
+                                                    <h1 class="my_name">{{ user.first_name }} {{ user.last_name }}</h1>
+                                                    {{ form.text }}
+                                                </div>
+                                                <button style="border: 0; background-color: #fff" type="submit" class="publish_btn"></button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="publish_comment">
-                                        <img class="my_ava" src='https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'>
-                                        <div class="my_data">
-                                            <div class="my_name_cont">
-                                                <h1 class="my_name">Name Surname</h1>
-                                                <input class="my_comment" id="my_comment" placeholder="Написать комментарий...">
-                                            </div>
-                                            <div class="publish_btn"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+                                </section>
+                            </form>
                         </ul>
                     {% endfor %}
                 {% else %}
@@ -115,7 +127,6 @@
             </div>
         </div>
     </main>
-
     <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
     <script type="module" src="{% static 'src/scripts/teacher-profile-dropdown.js' %}"></script>
     <script type="module" src="{% static 'src/scripts/drop_comment.js' %}"></script>

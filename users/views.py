@@ -2,12 +2,13 @@ from django.contrib import auth, messages
 from django.db.models import Q
 from django.shortcuts import HttpResponseRedirect, render, redirect
 from django.urls import reverse, reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
 
-from .forms import UserLoginForm, UserProfileForm, LectureForm, LinkForm, PersonalLinkForm
+from .forms import UserLoginForm, UserProfileForm, LectureForm, LinkForm, PersonalLinkForm, ReviewForm
 from .models import User, TeacherLink, PersonalTeacherLinks
-from lessons.models import Lecture, Schedules, RPD
+from lessons.models import Lecture, Schedules, RPD, ProfDB, Reviews
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 
@@ -47,9 +48,11 @@ class UserProfileView(UpdateView):
             context['private_personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user, private=True).order_by('-created_at')
             context['links'] = TeacherLink.objects.filter(teacher=user).order_by('-created_at')
         else:
+            context['prof_db'] = ProfDB.objects.filter(facult=user.facult)
             context['links'] = TeacherLink.objects.filter(
-                Q(faculty=user.facult, course=user.course, group=user.group) | Q(faculty=user.facult, course=user.course, group=None)).order_by('-created_at')
-        context['schedules'] = Schedules.objects.filter(facult=user.facult, course=user.course, group=user.group)
+                Q(faculty=user.facult, course=user.course, group=user.group) | Q(faculty=user.facult, course=user.course, group=None)
+            ).order_by('-created_at')
+        context['schedules'] = Schedules.objects.filter(facult=user.facult)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -78,40 +81,59 @@ def add_personal_link(request):
             link = form.cleaned_data['link']
             facult = form.cleaned_data['facult']
             course = form.cleaned_data['course']
-            group = form.cleaned_data['group']
+            group = form.cleaned_data['group'] if 'group' in form.cleaned_data else None
             private = form.cleaned_data['private']
-            if link.startswith('http://') or link.startswith('https://'):
-                personal_link = PersonalTeacherLinks(teacher=teacher, title=title,
-                                                     link=link, facult=facult,
-                                                     course=course, group=group, private=private)
-                personal_link.save()
-                return redirect('users:profile', pk=teacher.pk)
-            else:
-                messages.error(request, 'Пожалуйста, введите корректную ссылку (начиная с "http://" или "https://").')
-
-        return redirect('users:profile', pk=teacher.pk)
+            personal_link = PersonalTeacherLinks(teacher=teacher, title=title,
+                                                 link=link, facult=facult,
+                                                 course=course, group=group, private=private)
+            personal_link.save()
+            return redirect('users:profile', pk=teacher.pk)
 
 
+def add_review(request, pk):
+    lecture = get_object_or_404(Lecture, id=pk)
 
-class TeacherProfile(TemplateView):
-    template_name = 'teacher-profile.html'
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            name = request.user
+            text = form.cleaned_data['text']
+            review = Reviews(name=name, text=text, lecture=lecture)
+            review.save()
 
-    def get(self, request, teacher_id):
-        teacher = User.objects.get(id=teacher_id, is_teacher=True)
-        lectures = teacher.lectures.order_by('-created_at')
-        context = {
-            'teacher': teacher,
-            'lectures': lectures
-        }
-        return render(request, self.template_name, context)
+    if request.user.is_teacher:
+        teacher_profile_url = reverse('users:teacher_profile', args=(lecture.lecturer.id,))
+        return redirect(teacher_profile_url)
+    teacher_profile_url = reverse('users:public_profile', args=(lecture.lecturer.id,))
+    return redirect(teacher_profile_url)
+
+
+def delete_review(request, review_id):
+    review = get_object_or_404(Reviews, pk=review_id)
+    if request.user.is_teacher:
+        review.delete()
+    elif review.name == request.user:
+        review.delete()
+
+    if request.user.is_teacher:
+        teacher_profile_url = reverse('users:teacher_profile', args=(review.lecture.lecturer.id,))
+        return redirect(teacher_profile_url)
+    teacher_profile_url = reverse('users:public_profile', args=(review.lecture.lecturer.id,))
+    return redirect(teacher_profile_url)
 
 
 def add_lecture(request):
     if request.method == 'POST':
         form = LectureForm(request.POST)
         if form.is_valid():
-            lecture = form.save(commit=False)
-            lecture.lecturer = request.user
+            lecturer = request.user
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            facult = form.cleaned_data['facult']
+            course = form.cleaned_data['course']
+            group = form.cleaned_data['group']
+            lecture = Lecture(lecturer=lecturer, title=title, description=description, facult=facult, course=course,
+                              group=group)
             lecture.save()
 
             teacher_id = request.user.pk
@@ -191,7 +213,7 @@ class SchedulesView(TemplateView):
             if user.is_teacher:
                 context['all_schedules'] = Schedules.objects.all()
             else:
-                context['all_schedules'] = Schedules.objects.filter(course=user.course, facult=user.facult)
+                context['all_schedules'] = Schedules.objects.filter(facult=user.facult)
         return context
 
 
@@ -204,29 +226,58 @@ class AllTeachers(TemplateView):
         course = user.course
         group = user.group
         teachers = User.objects.filter(is_teacher=True)
-        teachers_with_lectures = teachers.filter(lectures__facult=facult, lectures__course=course, lectures__group=group).distinct()
+
+        teachers_with_lectures = teachers.filter(
+            Q(lectures__facult=facult, lectures__course=course, lectures__group=group) |
+            Q(lectures__facult=facult, lectures__course=course, lectures__group=None) |
+            Q(personalteacherlinks__facult=facult, personalteacherlinks__course=course, personalteacherlinks__group=group) |
+            Q(personalteacherlinks__facult=facult, personalteacherlinks__course=course, personalteacherlinks__group=None)
+        ).distinct()
         context = {'all_teachers': teachers_with_lectures}
         return render(request, self.template_name, context)
 
 
+
+class TeacherProfile(TemplateView):
+    template_name = 'teacher-profile.html'
+    form = ReviewForm()
+
+    def get(self, request, teacher_id):
+        teacher = User.objects.get(id=teacher_id, is_teacher=True)
+        lectures = teacher.lectures.order_by('-created_at')
+        context = {
+            'teacher': teacher,
+            'lectures': lectures,
+            'form': self.form
+        }
+        return render(request, self.template_name, context)
+
+
+
 class PublicTeacherProfile(TemplateView):
     template_name = 'teacher-public_profile.html'
+    form = ReviewForm()
 
     def get(self, request, teacher_id):
         facult = self.request.user.facult
         course = self.request.user.course
         group = self.request.user.group
         teacher = User.objects.get(id=teacher_id, is_teacher=True)
-        lectures = teacher.lectures.filter(
-            Q(facult=facult, course=course, group=group) | Q(facult=facult, course=course, group=None)
+        lectures = Lecture.objects.filter(
+            Q(lecturer=teacher, facult=facult, course=course, group=group) | Q(lecturer=teacher, facult=facult,
+                                                                               course=course, group=None)
         ).order_by('-created_at')
+
         personal_links = PersonalTeacherLinks.objects.filter(
-            Q(facult=facult, course=course, group=group) | Q(facult=facult, course=course, group=None)
+            Q(teacher=teacher, facult=facult, course=course, group=group) | Q(teacher=teacher, facult=facult,
+                                                                              course=course, group=None)
         ).order_by('-created_at')
+
         context = {
             'teacher': teacher,
             'lectures': lectures,
-            'personal_links': personal_links
+            'personal_links': personal_links,
+            'form': self.form
         }
         return render(request, self.template_name, context)
 

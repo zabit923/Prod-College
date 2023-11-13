@@ -61,7 +61,7 @@ class TeacherLink(models.Model):
     faculty = models.ForeignKey(Facult, on_delete=models.CASCADE, default='')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default='')
     group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.CASCADE, default='')
-    link = models.CharField(max_length=150, null=True, blank=False)
+    link = models.CharField(max_length=300, null=True, blank=False)
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -74,7 +74,7 @@ class TeacherLink(models.Model):
 
 class PersonalTeacherLinks(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    title = models.CharField()
     link = models.CharField()
     private = models.BooleanField(default=False, null=True, blank=True)
     facult = models.ForeignKey(Facult, null=True, blank=True, on_delete=models.CASCADE, default='')

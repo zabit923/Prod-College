@@ -13,7 +13,7 @@
                      src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}"
                      class="img-thumbnail">
             </div>
-            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="col-lg-6">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </form>
-            <form action="{% url 'users:add_personal_link' %}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'users:add_personal_link' %}" method="post" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
                 {% if user.is_teacher %}
                 <div style="margin-bottom: 20px;" class="important_link">
@@ -111,7 +111,7 @@
                 </div>
                 {% endif %}
             </form>
-            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
                 {% if user.is_teacher %}
                 <div>
@@ -161,7 +161,11 @@
                             {% for link in links %}
                             {% if link.link %}
                                 <li>
-                                    <p><span>Отправитель:</span> <a href="{{ link.profile_url }}">{{ link.teacher }}</a></p>
+                                    <p><span>Отправитель:</span>
+                                        <a href="{% url 'users:public_profile' link.teacher.id %}">
+                                            {{link.teacher.get_full_name }}
+                                        </a> | <span style="font-size: 12px;">{{ link.created_at|date:"d.m.Y"}}</span>
+                                    </p>
                                     <div>
                                         {{ link.link|format_text|safe }}
                                     </div>

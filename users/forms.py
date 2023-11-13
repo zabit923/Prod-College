@@ -8,7 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.utils.timezone import now
 
 from .models import User, TeacherLink, Facult, Course, Group, PersonalTeacherLinks
-from lessons.models import Lecture
+from lessons.models import Lecture, Reviews
 
 
 
@@ -49,9 +49,16 @@ class PersonalLinkForm(forms.ModelForm):
         fields = ('title', 'link')
 
 
+class ReviewForm(forms.ModelForm):
+    text = forms.CharField(widget=forms.TextInput(attrs={'class': 'my_comment', 'id': 'my_comment', 'placeholder': 'Написать комментарий...'}))
+
+    class Meta:
+        model = Reviews
+        fields = ('text',)
+
 class UserProfileForm(UserChangeForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'readonly': 'readonly'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'readonly': 'readonly'}))
     image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'custom-file-input'}), required=False)
 
     link_form = LinkForm()
@@ -64,6 +71,7 @@ class UserProfileForm(UserChangeForm):
 
 
 class LectureForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название'}))
     facult = forms.ModelChoiceField(queryset=Facult.objects.exclude(name='учитель'), label='Специальность')
     course = forms.ModelChoiceField(queryset=Course.objects.all(), label='Курс')
     group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Группа')
