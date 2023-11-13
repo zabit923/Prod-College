@@ -30,7 +30,7 @@
         }
 
         &>.show_all_comments{
-            @include size(100%, 85%);
+            @include size(100%);
             overflow-y: scroll;
             display: grid;
             grid-template-columns: repeat(1, 1fr);
