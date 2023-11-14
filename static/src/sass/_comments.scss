@@ -57,9 +57,11 @@
 
 
             &>.comment{
-                height: max-content;
+                // height: max-content;
                 display: flex;
                 gap: 20px;
+                height: auto;
+                overflow: hidden;
 
                 &>img{
                     @include size(50px, 50px);
@@ -67,15 +69,15 @@
                 }
 
                 &>.user_data{
-                    width: 100%;
                     display: flex;
                     justify-content: space-between;
-                    
+                    width: 100%;
 
                     &>.left_side{
                         display: flex;
                         flex-direction: column;
                         justify-content: space-evenly;
+
 
                         &>h1{
                             @include font(16px, 16px, 600);
@@ -90,6 +92,8 @@
     
                         &>p{
                             @include font(14px, 14px, 400);
+                            overflow-wrap: break-word;
+                            width: 550px;
                         }
                     }
 
