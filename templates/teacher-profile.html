@@ -88,11 +88,16 @@
                                         <div class="comment">
                                             <img class="user_ava" src="{% if review.name.image %}{{ review.name.image.url }}{% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
                                             <div class="user_data">
-                                                <h1 style="color: #0680FD" class="user_name" id="user_name">
-                                                    {{ review.name.first_name }} {{ review.name.last_name }}
-                                                </h1><p style="font-size:14px;" class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
-                                                <p style="margin-top: 10px;" class="user_comment">{{ review.text }}
-                                                     <a style="text-decoration: none; margin-left:10px; font-size: 18px;" href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a></p>
+                                                <div class="left_side">
+                                                    <h1 style="color: #0680FD" class="user_name" id="user_name">
+                                                        {{ review.name.first_name }} {{ review.name.last_name }}
+                                                    </h1>
+                                                    <p style="margin-top: 10px;" class="user_comment">{{ review.text }}
+                                                </div>
+                                                <div class="right_side">
+                                                    <p style="font-size:14px;" class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
+                                                    <a style="text-decoration: none; margin-left:10px; font-size: 18px;" href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a></p>
+                                                </div>
                                             </div>
                                         </div>
                                     {% endfor %}
