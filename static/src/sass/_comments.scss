@@ -93,7 +93,7 @@
                         &>p{
                             @include font(14px, 14px, 400);
                             overflow-wrap: break-word;
-                            width: 550px;
+                            max-width: 550px;
                         }
                     }
 
