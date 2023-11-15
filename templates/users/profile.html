@@ -63,7 +63,7 @@
                         <button class="btn_important_links" id="btn_important_links">Важные ссылки</button>
                         <ul class="drop_down_link_list" id="drop_down_link_list">
                             {% if private_personal_links %}
-                            <div style="margin: 0 auto;"><b>Только у меня</b></div>
+                                <div style="margin: 0 auto;"><b>Только у меня</b></div>
                             {% for link in private_personal_links %}
                             <li>
                                 <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
