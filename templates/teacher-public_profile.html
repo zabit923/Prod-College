@@ -28,8 +28,10 @@
                 {% endif %}
                 <li><a href="/news">Новости</a></li>
                 <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
-                {% if user.is_teacher %}
+                {% if user.is_authenticated %}
                     <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                {% else %}
+                    <li><a href="https://raspisanie.dgu.ru/">Расписание</a></li>
                 {% endif %}
                 {% if user.is_authenticated %}
                     {% if not user.is_teacher %}
@@ -95,16 +97,17 @@
                                                     <img class="user_ava" src="{% if review.name.image %}{{ review.name.image.url }}{% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
                                                     <div class="user_data">
                                                         <div class="left_side">
-                                                            <h1 class="user_name" id="user_name_{{ review.name.id }}">
+                                                            <h1 style="color: #1D8CFD" class="user_name"
+                                                                id="user_name_{{ review.name.id }}">
                                                                 {{ review.name.first_name }} {{ review.name.last_name }}
                                                             </h1>
                                                             <p class="user_comment">{{ review.text }}</p>
-                                                        </div>
-                                                        <div class="right_side">
-                                                            <p class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
                                                             {% if review.name == user %}
                                                                 <a href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a>
                                                             {% endif %}
+                                                        </div>
+                                                        <div class="right_side">
+                                                            <p class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
                                                         </div>
                                                     </div>
                                                 </div>

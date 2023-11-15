@@ -27,8 +27,10 @@
             <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
             {% endif %}
             <li><a href="/news">Новости</a></li>
-            {% if user.is_teacher %}
-            <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+            {% else %}
+                <li><a href="https://raspisanie.dgu.ru/">Расписание</a></li>
             {% endif %}
             {% if user.is_authenticated %}
             {% if not user.is_teacher %}
@@ -92,11 +94,10 @@
                                                     <h1 style="color: #0680FD" class="user_name" id="user_name">
                                                         {{ review.name.first_name }} {{ review.name.last_name }}
                                                     </h1>
-                                                    <p style="margin-top: 10px;" class="user_comment">{{ review.text }}
+                                                    <p style="margin-top: 10px;" class="user_comment">{{ review.text }}</p><a style="text-decoration: none; margin-left:10px; font-size: 18px;" href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a>
                                                 </div>
                                                 <div class="right_side">
                                                     <p style="font-size:14px;" class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
-                                                    <a style="text-decoration: none; margin-left:10px; font-size: 18px;" href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a></p>
                                                 </div>
                                             </div>
                                         </div>

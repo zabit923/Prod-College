@@ -29,7 +29,11 @@
                     <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
                 {% endif %}
                 <li><a href="/news">Новости</a></li>
-                <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                {% else %}
+                    <li><a href="https://raspisanie.dgu.ru/">Расписание</a></li>
+                {% endif %}
                 {% if user.is_teacher %}
                     <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
                 {% endif %}
