@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const userNameElements = document.querySelectorAll('.user_name');
+    const userNameElements = document.querySelectorAll('.answer_comment');
     const myCommentElements = document.querySelectorAll('.my_comment');
 
     userNameElements.forEach((userName, index) => {

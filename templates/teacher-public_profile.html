@@ -89,7 +89,7 @@
                                 <section class="lectures_comments">
                                     <button class="show_comment" id="show_comment_{{ lecture.id }}">Показать комментарии ({{ lecture.get_review|length }})</button>
                                     <div class="comments_container" id="comments_container">
-                                        <div class="show_all_comments">
+                                        <div class="show_all_comments" id="show_all_comments">
                                             {% for review in lecture.get_review %}
                                                 <div class="comment">
                                                     <img class="user_ava" src="{% if review.name.image %}{{ review.name.image.url }}{% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
@@ -101,7 +101,6 @@
                                                             <p class="user_comment">{{ review.text }}</p>
                                                         </div>
                                                         <div class="right_side">
-                                                            <p class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
                                                             {% if review.name == user %}
                                                                 <a href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a>
                                                             {% endif %}

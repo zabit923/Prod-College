@@ -123,3 +123,15 @@ function updateLastListItemStyle() {
 }
 
 updateLastListItemStyle();
+
+
+///////PROF_BD///////////////////
+const profBdDroplist = document.getElementById('prof_bd_droplist'),
+      profBdBtn = document.getElementById('prof_bd_btn');
+
+
+if(profBdBtn){
+    profBdBtn.addEventListener('click', () => {
+    profBdDroplist.classList.toggle('active');
+})
+}
