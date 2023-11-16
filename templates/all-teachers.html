@@ -27,13 +27,10 @@
                         <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
                     {% endif %}
                     <li><a href="/news">Новости</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
-                    {% else %}
-                        <li><a href="https://raspisanie.dgu.ru/">Расписание</a></li>
-                    {% endif %}
+                    <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
                     {% if user.is_authenticated %}
                         {% if not user.is_teacher %}
+                            <li><a href="https://bitrix.dgu.ru/eios/Svedeniya-ob-EIOS-bibl.pdf">Библ. ресурсы</a></li>
                             <li><a href="{% url 'users:blog' %}">Преподаватели</a></li>
                         {% endif %}
                         <li><a style="color: #fff;" href="{% url 'users:profile' user.id%}">Профиль</a></li>

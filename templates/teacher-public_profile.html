@@ -28,13 +28,12 @@
                 {% endif %}
                 <li><a href="/news">Новости</a></li>
                 <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
-                {% if user.is_authenticated %}
+                {% if user.is_teacher %}
                     <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
-                {% else %}
-                    <li><a href="https://raspisanie.dgu.ru/">Расписание</a></li>
                 {% endif %}
                 {% if user.is_authenticated %}
                     {% if not user.is_teacher %}
+                        <li><a href="https://bitrix.dgu.ru/eios/Svedeniya-ob-EIOS-bibl.pdf">Библ. ресурсы</a></li>
                         <li><a href="{% url 'users:blog' %}">Преподаватели</a></li>
                     {% endif %}
                     <li><a style="color: #fff;" href="{% url 'users:profile' user.id%}">Профиль</a></li>
@@ -91,23 +90,22 @@
                                 <section class="lectures_comments">
                                     <button class="show_comment" id="show_comment_{{ lecture.id }}">Показать комментарии ({{ lecture.get_review|length }})</button>
                                     <div class="comments_container" id="comments_container">
-                                        <div class="show_all_comments">
+                                        <div class="show_all_comments" id="show_all_comments">
                                             {% for review in lecture.get_review %}
                                                 <div class="comment">
                                                     <img class="user_ava" src="{% if review.name.image %}{{ review.name.image.url }}{% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
                                                     <div class="user_data">
                                                         <div class="left_side">
-                                                            <h1 style="color: #1D8CFD" class="user_name"
-                                                                id="user_name_{{ review.name.id }}">
+                                                            <h1 class="user_name" id="user_name_{{ review.name.id }}">
                                                                 {{ review.name.first_name }} {{ review.name.last_name }}
                                                             </h1>
                                                             <p class="user_comment">{{ review.text }}</p>
+                                                            <h2 class="answer_comment">Ответить</h2>
+                                                        </div>
+                                                        <div class="right_side">
                                                             {% if review.name == user %}
                                                                 <a href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a>
                                                             {% endif %}
-                                                        </div>
-                                                        <div class="right_side">
-                                                            <p class="user_comment">{{ review.created_at|date:"d.m.Y" }}</p>
                                                         </div>
                                                     </div>
                                                 </div>

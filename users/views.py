@@ -47,6 +47,12 @@ class UserProfileView(UpdateView):
             context['personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user, private=False).order_by('-created_at')
             context['private_personal_links'] = PersonalTeacherLinks.objects.filter(teacher=user, private=True).order_by('-created_at')
             context['links'] = TeacherLink.objects.filter(teacher=user).order_by('-created_at')
+
+            context['ur_teachers'] = User.objects.filter(
+                Q(lectures__lecturer=user, lectures__facult=4) | Q(personalteacherlinks__teacher=user, personalteacherlinks__facult=4) |
+                Q(lectures__lecturer=user, lectures__facult=5) | Q(personalteacherlinks__teacher=user, personalteacherlinks__facult=5) |
+                Q(lectures__lecturer=user, lectures__facult=6) | Q(personalteacherlinks__teacher=user, personalteacherlinks__facult=6)
+            ).distinct()
         else:
             context['prof_db'] = ProfDB.objects.filter(facult=user.facult)
             context['links'] = TeacherLink.objects.filter(

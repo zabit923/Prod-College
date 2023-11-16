@@ -13,8 +13,7 @@
                      src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}"
                      class="img-thumbnail">
             </div>
-            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data"
-                  autocomplete="off">
+            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="col-lg-6">
@@ -41,9 +40,9 @@
                 </div>
 
                 {% if not user.is_teacher %}
-                {% for schedule in schedules %}
-                <a style="margin: 10px;" href="{{ schedule.schedule.url }}">Расписание</a>
-                {% endfor %}
+                    {% for schedule in schedules %}
+                        <a style="margin: 10px;" href="{{ schedule.schedule.url }}">Расписание</a>
+                    {% endfor %}
                 {% endif %}
                 <div class="form-row">
                     <div class="col-lg-12" style="margin-top: 33px;">
@@ -56,8 +55,7 @@
                     </div>
                 </div>
             </form>
-            <form action="{% url 'users:add_personal_link' %}" method="post" enctype="multipart/form-data"
-                  autocomplete="off">
+            <form action="{% url 'users:add_personal_link' %}" method="post" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
                 {% if user.is_teacher %}
                 <div style="margin-bottom: 20px;" class="important_link">
@@ -113,85 +111,71 @@
                 </div>
                 {% endif %}
             </form>
-            <div class="prof_bd">
-                <button class="prof_bd_btn" id="prof_bd_btn">Проф БД</button>
-                <div class="prof_bd_droplist" id="prof_bd_droplist">
-                    <a href="https://oop.dgu.ru/sved/files-oop/20231025z1.pdf">ПД</a>
-                    <div class="prof_line"></div>
-                    <a href="https://oop.dgu.ru/sved/files-oop/20231025z3.pdf">ПСО</a>
-                    <div class="prof_line"></div>
-                    <a href="https://oop.dgu.ru/sved/files-oop/20231025z2.pdf">ПСА</a>
-                </div>
-            </div> 
-            <div class="tchr_profile_line"></div>
-            <form style="margin-top: 10px;" action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data"
-                  autocomplete="off">
+            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
                 {% if user.is_teacher %}
+                <div>
+                    <ul class="teacher_profile_droplist">
+                        <li>{{ form.link_form.facult.label_tag }}</li>
+                        <li>{{ form.link_form.facult }}</li>
+                    </ul>
+                    <ul class="teacher_profile_droplist">
+                        <li>{{ form.link_form.course.label_tag }}</li>
+                        <li>{{ form.link_form.course }}</li>
+                    </ul>
+                    <ul class="teacher_profile_droplist">
+                        <li>{{ form.link_form.group.label_tag }}</li>
+                        <li>{{ form.link_form.group }}</li>
+                    </ul>
                     <ul>{{ form.link_form.link.label_tag }} {{ form.link_form.link }}</ul>
-                    <div class="teacher_profile_dropdowns">
-                        <ul class="teacher_profile_droplist">
-                            <li>{{ form.link_form.facult.label_tag }}</li>
-                            <li>{{ form.link_form.facult }}</li>
-                        </ul>
-                        <ul class="teacher_profile_droplist">
-                            <li>{{ form.link_form.course.label_tag }}</li>
-                            <li>{{ form.link_form.course }}</li>
-                        </ul>
-                        <ul class="teacher_profile_droplist">
-                            <li>{{ form.link_form.group.label_tag }}</li>
-                            <li>{{ form.link_form.group }}</li>
-                        </ul>
-                    </div>
+                </div>
                 <div class="form-row">
                     <div class="col-lg-12" style="margin-top: 33px;">
-                        <input style="margin-bottom: 15px;" class="btn btn-info btn-block" type="submit"
+                        <input style="margin-bottom: 40px;" class="btn btn-info btn-block" type="submit"
                                value="Отправить">
                     </div>
                 </div>
                 {% endif %}
             </form>
-            {% if user.is_teacher %}
-            <div class="msg_teacher_cont">
-                <button class="btn_teacher_message" id="btn_message">Мои сообщения</button>
-                <ul class="drop_down_msg_list" id="drop_down_msg_list">
-                    {% for link in links %}
-                    {% if link.link %}
-                    <li>
-                        <div>
-                            {{ link.link|format_text|safe }}
-                        </div>
-                        <a style="text-decoration: none;" href="{% url 'users:delete_link' link.pk %}">
-                            &#10006;
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-            </div>
-            {% else %}
-            <div class="msg_student_cont" id="msg_student_cont">
-                <button class="btn_message" id="btn_message"></button>
-                <ul class="drop_down_msg_list_student" id="drop_down_msg_list">
-                    {% for link in links %}
-                    {% if link.link %}
-                    <li>
-                        <p><span>Отправитель:</span>
-                            <a href="{% url 'users:public_profile' link.teacher.id %}">
-                                {{link.teacher.get_full_name }}
-                            </a> | <span style="font-size: 12px;">{{ link.created_at|date:"d.m.Y"}}</span>
-                        </p>
-                        <div>
-                            {{ link.link|format_text|safe }}
-                        </div>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-            </div>
-            {% endif %}
+                {% if user.is_teacher %}
+                    <div class="msg_teacher_cont">
+                        <button class="btn_teacher_message" id="btn_message">Мои сообщения</button>
+                        <ul class="drop_down_msg_list" id="drop_down_msg_list">
+                            {% for link in links %}
+                            {% if link.link %}
+                                <li>
+                                    <div>
+                                        {{ link.link|format_text|safe }}
+                                    </div>
+                                    <a style="text-decoration: none;" href="{% url 'users:delete_link' link.pk %}">
+                                        &#10006;
+                                    </a>
+                                </li> 
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="msg_student_cont" id="msg_student_cont">
+                        <button class="btn_message" id="btn_message"></button> 
+                        <ul class="drop_down_msg_list_student" id="drop_down_msg_list">
+                            {% for link in links %}
+                            {% if link.link %}
+                                <li>
+                                    <p><span>Отправитель:</span>
+                                        <a href="{% url 'users:public_profile' link.teacher.id %}">
+                                            {{link.teacher.get_full_name }}
+                                        </a> | <span style="font-size: 12px;">{{ link.created_at|date:"d.m.Y"}}</span>
+                                    </p>
+                                    <div>
+                                        {{ link.link|format_text|safe }}
+                                    </div>
+                                </li>
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+                {% endif %}
         </div>
     </div>
 </div>
 </div>
 {% endblock %}
-
-
