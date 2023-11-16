@@ -57,11 +57,10 @@
 
 
             &>.comment{
-                // height: max-content;
                 display: flex;
-                gap: 20px;
+                gap: 2%;
                 height: auto;
-                overflow: hidden;
+                // overflow: hidden;
 
                 &>img{
                     @include size(50px, 50px);
@@ -81,40 +80,29 @@
 
                         &>h1{
                             @include font(16px, 16px, 600);
-                            cursor: pointer;
                             transition: all .3s ease;
-    
-                            &:hover{
-                                color: #19c7e2;
-                                text-decoration: underline
-                            }
                         }
     
                         &>p{
+                            margin-top: 5px;
                             @include font(14px, 14px, 400);
                             overflow-wrap: break-word;
                             max-width: 550px;
                         }
+
+                        &>h2{
+                            @include font(12px, 12px, 400);
+                            color: rgb(156, 156, 156);
+                            margin-top: 5px;
+                            cursor: pointer;
+                        }
                     }
 
-                    &>.right_side{
-                        display: flex;
-                        justify-content: space-evenly;
-                        gap: 10px;
-
-                        &>p{
-                            @include font(16px, 24px, 400);
-                            color: #000000;
-                            text-align: center;
-                            border-radius: 7px;
-                        }
-
-                        &>a{
-                            box-sizing: border-box;
-                            padding-top: 3px;
-                            text-decoration: none;  
-                            font-size: 18px;
-                        }
+                    &>.right_side a{
+                        box-sizing: border-box;
+                        padding-top: 3px;
+                        text-decoration: none;  
+                        font-size: 18px;
                     }
 
 
