@@ -9,6 +9,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('news.urls')),
     path('users/', include('users.urls', namespace='users')),
+    path('data/', include('lessons.urls', namespace='data'))
 ]
 
 if settings.DEBUG:

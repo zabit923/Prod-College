@@ -5,11 +5,11 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
 
-from .forms import UserLoginForm, UserProfileForm, LectureForm, LinkForm, PersonalLinkForm, ReviewForm
+from .forms import UserLoginForm, UserProfileForm, LinkForm, PersonalLinkForm
 from .models import User, TeacherLink, PersonalTeacherLinks
-from lessons.models import Lecture, Schedules, RPD, ProfDB, Reviews
 from django.shortcuts import get_object_or_404
-from django.views.generic.detail import DetailView
+
+from lessons.forms import ReviewForm
 
 
 def login(request):
@@ -93,75 +93,6 @@ def add_personal_link(request):
             return redirect('users:profile', pk=teacher.pk)
 
 
-def add_review(request, pk):
-    lecture = get_object_or_404(Lecture, id=pk)
-
-    if request.method == "POST":
-        form = ReviewForm(request.POST, request.FILES)
-        if form.is_valid():
-            name = request.user
-            text = form.cleaned_data['text']
-            file = form.cleaned_data['file']
-            review = Reviews(name=name, text=text, file=file, lecture=lecture)
-            review.save()
-
-    if request.user.is_teacher:
-        teacher_profile_url = reverse('users:teacher_profile', args=(lecture.lecturer.id,))
-        return redirect(teacher_profile_url)
-    teacher_profile_url = reverse('users:public_profile', args=(lecture.lecturer.id,))
-    return redirect(teacher_profile_url)
-
-
-def delete_review(request, review_id):
-    review = get_object_or_404(Reviews, pk=review_id)
-    if request.user.is_teacher:
-        review.delete()
-    elif review.name == request.user:
-        review.delete()
-
-    if request.user.is_teacher:
-        teacher_profile_url = reverse('users:teacher_profile', args=(review.lecture.lecturer.id,))
-        return redirect(teacher_profile_url)
-    teacher_profile_url = reverse('users:public_profile', args=(review.lecture.lecturer.id,))
-    return redirect(teacher_profile_url)
-
-
-def add_lecture(request):
-    if request.method == 'POST':
-        form = LectureForm(request.POST)
-        if form.is_valid():
-            lecturer = request.user
-            title = form.cleaned_data['title']
-            description = form.cleaned_data['description']
-            facult = form.cleaned_data['facult']
-            course = form.cleaned_data['course']
-            group = form.cleaned_data['group']
-            lecture = Lecture(lecturer=lecturer, title=title, description=description, facult=facult, course=course,
-                              group=group)
-            lecture.save()
-
-            teacher_id = request.user.pk
-            profile_url = reverse('users:teacher_profile', args=(teacher_id,))
-            return redirect(profile_url)
-    else:
-        form = LectureForm()
-
-    return render(request, 'new_lesson.html', {'form': form})
-
-
-def delete_lecture(request, lecture_id):
-    lecture = get_object_or_404(Lecture, pk=lecture_id)
-    if lecture.lecturer == request.user:
-        lecture.delete()
-        messages.success(request, 'Лекция успешно удалена.')
-    else:
-        messages.error(request, 'Вы не можете удалить эту лекцию.')
-
-    teacher_id = request.user.pk
-    profile_url = reverse('users:teacher_profile', args=(teacher_id,))
-    return redirect(profile_url)
-
-
 def delete_personal_link(request, link_id):
     link = get_object_or_404(PersonalTeacherLinks, pk=link_id)
     if link.teacher == request.user:
@@ -188,39 +119,6 @@ def delete_link(request, link_id):
     return redirect(profile_url)
 
 
-class LectureDetail(DetailView):
-    model = Lecture
-    template_name = 'lecture.html'
-    context_object_name = 'lecture'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        facult = self.object.facult
-        course = self.object.course
-        group = self.object.group
-
-        context['facult'] = facult
-        context['course'] = course
-        context['group'] = group
-
-        return context
-
-
-class SchedulesView(TemplateView):
-    template_name = 'schedule.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.request.user
-        if user.is_authenticated:
-            if user.is_teacher:
-                context['all_schedules'] = Schedules.objects.all()
-            else:
-                context['all_schedules'] = Schedules.objects.filter(facult=user.facult)
-        return context
-
-
 class AllTeachers(TemplateView):
     template_name = 'all-teachers.html'
 
@@ -241,7 +139,6 @@ class AllTeachers(TemplateView):
         return render(request, self.template_name, context)
 
 
-
 class TeacherProfile(TemplateView):
     template_name = 'teacher-profile.html'
     form = ReviewForm()
@@ -255,7 +152,6 @@ class TeacherProfile(TemplateView):
             'form': self.form
         }
         return render(request, self.template_name, context)
-
 
 
 class PublicTeacherProfile(TemplateView):
@@ -289,4 +185,3 @@ class PublicTeacherProfile(TemplateView):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
-

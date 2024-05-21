@@ -48,7 +48,7 @@
                     {% endif %}
                     <li><a href="/news">Новости</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                        <li><a href="{% url 'data:schedules' %}">Расписание</a></li>
                     {% else %}
                         <li><a href="https://raspisanie.dgu.ru/">Расписание</a></li>
                     {% endif %}
@@ -152,7 +152,7 @@
                         <ul class="cont1_students">
                             <h1 class="cont1_title">Студентам</h1>
                             {% if user.is_authenticated %}
-                                <li class="cont1_students_item"><a href="{% url 'users:schedules' %}">Расписание</a></li>
+                                <li class="cont1_students_item"><a href="{% url 'data:schedules' %}">Расписание</a></li>
                             {% else %}
                                 <li class="cont1_students_item"><a href="https://raspisanie.dgu.ru/">Расписание</a></li>
                             {% endif %}
