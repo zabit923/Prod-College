@@ -85,7 +85,7 @@
                                     </button>
                                 </p>
                             </li>
-                            <form action="{% url 'users:add_review' pk=lecture.id %}" autocomplete="off" method="post">
+                            <form action="{% url 'users:add_review' pk=lecture.id %}" enctype="multipart/form-data" autocomplete="off" method="post">
                                 {% csrf_token %}
                                 <section class="lectures_comments">
                                     <button class="show_comment" id="show_comment_{{ lecture.id }}">Показать комментарии ({{ lecture.get_review|length }})</button>
@@ -100,7 +100,10 @@
                                                                 {{ review.name.first_name }} {{ review.name.last_name }}
                                                             </h1>
                                                             <p class="user_comment">{{ review.text }}</p>
-                                                            <h2 class="answer_comment">Ответить</h2>
+                                                            {% if review.file %}
+                                                                <a style="margin-top: 10px; text-decoration: underline; color: #17A2B8; font-family: 'Inter', sans-serif; font-size: 12px;" href="{{ review.file.url }}">Посмотреть прикрепленный файл</a>
+                                                            {% endif %}
+                                                            <h2 style="margin-top: 15px" class="answer_comment">Ответить</h2>
                                                         </div>
                                                         <div class="right_side">
                                                             {% if review.name == user %}
@@ -118,6 +121,7 @@
                                                 <div class="my_name_cont">
                                                     <h1 class="my_name">{{ user.first_name }} {{ user.last_name }}</h1>
                                                     {{ form.text }}
+                                                    {{ form.file }}
                                                 </div>
                                                 <button style="border: 0; background-color: #fff" type="submit" class="publish_btn"></button>
                                             </div>

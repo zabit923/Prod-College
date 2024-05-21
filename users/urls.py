@@ -5,6 +5,7 @@ from .views import UserProfileView, login, logout, TeacherProfile, add_lecture, 
     SchedulesView, AllTeachers, PublicTeacherProfile, add_personal_link, delete_personal_link, delete_link, \
     add_review, delete_review
 
+
 app_name = 'users'
 
 urlpatterns = [

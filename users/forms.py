@@ -51,10 +51,12 @@ class PersonalLinkForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
     text = forms.CharField(widget=forms.TextInput(attrs={'class': 'my_comment', 'id': 'my_comment', 'placeholder': 'Написать комментарий...'}))
+    file = forms.FileField(required=False, widget=forms.FileInput(attrs={'style': 'width: 120px;'}))
 
     class Meta:
         model = Reviews
-        fields = ('text',)
+        fields = ('text', 'file')
+
 
 class UserProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'readonly': 'readonly'}))

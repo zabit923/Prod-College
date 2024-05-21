@@ -48,6 +48,7 @@ class RPD(models.Model):
         verbose_name = 'РПД'
         verbose_name_plural = 'РПД'
 
+
 class ProfDB(models.Model):
     facult = models.ForeignKey(Facult, on_delete=models.SET_NULL, null=True, blank=True, default='')
     link = models.URLField()
@@ -60,6 +61,7 @@ class ProfDB(models.Model):
 class Reviews(models.Model):
     name = models.ForeignKey(User, verbose_name='Имя', related_name='reviews', on_delete=models.CASCADE)
     text = models.TextField('Коментарий')
+    file = models.FileField('Файл', default='', null=True, blank=True, upload_to='review_files')
     created_at = models.DateTimeField(default=timezone.now)
     parent = models.ForeignKey(
         'self',

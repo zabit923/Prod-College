@@ -9,7 +9,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'course', 'is_teacher')
     list_filter = ('course', 'facult', 'group', 'is_teacher')
     search_fields = ('first_name', 'last_name')
-    exclude = ('email', 'user_permissions', 'groups', 'date_joined', 'last_login')
+    exclude = ('email', 'user_permissions', 'groups', 'date_joined', 'last_login', 'password', 'username')
 
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super().get_search_results(request, queryset, search_term)

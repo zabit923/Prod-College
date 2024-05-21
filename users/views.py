@@ -2,7 +2,6 @@ from django.contrib import auth, messages
 from django.db.models import Q
 from django.shortcuts import HttpResponseRedirect, render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
 
@@ -11,8 +10,6 @@ from .models import User, TeacherLink, PersonalTeacherLinks
 from lessons.models import Lecture, Schedules, RPD, ProfDB, Reviews
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
-
-
 
 
 def login(request):
@@ -100,11 +97,12 @@ def add_review(request, pk):
     lecture = get_object_or_404(Lecture, id=pk)
 
     if request.method == "POST":
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             name = request.user
             text = form.cleaned_data['text']
-            review = Reviews(name=name, text=text, lecture=lecture)
+            file = form.cleaned_data['file']
+            review = Reviews(name=name, text=text, file=file, lecture=lecture)
             review.save()
 
     if request.user.is_teacher:
