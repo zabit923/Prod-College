@@ -10,6 +10,7 @@ from .models import User, TeacherLink, PersonalTeacherLinks
 from django.shortcuts import get_object_or_404
 
 from lessons.forms import ReviewForm
+from lessons.models import Schedules, Lecture, ProfDB
 
 
 def login(request):
@@ -27,13 +28,13 @@ def login(request):
     else:
         form = UserLoginForm()
     context = {'form': form}
-    return render(request, 'users/login.html', context)
+    return render(request, 'login/login.html', context)
 
 
 class UserProfileView(UpdateView):
     model = User
     form_class = UserProfileForm
-    template_name = 'users/profile.html'
+    template_name = 'pages/profile.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -120,7 +121,7 @@ def delete_link(request, link_id):
 
 
 class AllTeachers(TemplateView):
-    template_name = 'all-teachers.html'
+    template_name = 'pages/all-teachers.html'
 
     def get(self, request, **kwargs):
         user = self.request.user
@@ -140,7 +141,7 @@ class AllTeachers(TemplateView):
 
 
 class TeacherProfile(TemplateView):
-    template_name = 'teacher-profile.html'
+    template_name = 'pages/teacher-profile.html'
     form = ReviewForm()
 
     def get(self, request, teacher_id):
@@ -155,7 +156,7 @@ class TeacherProfile(TemplateView):
 
 
 class PublicTeacherProfile(TemplateView):
-    template_name = 'teacher-public_profile.html'
+    template_name = 'pages/teacher-public_profile.html'
     form = ReviewForm()
 
     def get(self, request, teacher_id):

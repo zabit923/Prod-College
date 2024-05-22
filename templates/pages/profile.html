@@ -1,4 +1,4 @@
-{% extends 'users/base_for_profile.html' %}
+{% extends 'bases/base_for_profile.html' %}
 {% load link_filter %}
 {% load static %}
 
@@ -150,13 +150,13 @@
                                     <a style="text-decoration: none;" href="{% url 'users:delete_link' link.pk %}">
                                         &#10006;
                                     </a>
-                                </li> 
+                                </li>
                             {% endif %}
                             {% endfor %}
                     </div>
                 {% else %}
                     <div class="msg_student_cont" id="msg_student_cont">
-                        <button class="btn_message" id="btn_message"></button> 
+                        <button class="btn_message" id="btn_message"></button>
                         <ul class="drop_down_msg_list_student" id="drop_down_msg_list">
                             {% for link in links %}
                             {% if link.link %}

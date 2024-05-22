@@ -1,0 +1,23 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+
+
+{% block layout %}
+    <main class="main">
+        <div class="main_content">
+            <div class="main_news" id="main_news">
+                <h1 class="main_news_title">Что нового?</h1>
+                <ul class="all_news" id="main_all_news">
+                    {% for new in all_news %}
+                        <li class="main_news_item item1">
+                            <img src="{{ new.image.url }}" alt="">
+                            <div class="news_date">{{ new.created_at|date:"d.m.Y" }}</div>
+                            <p class="news_desc"><a href="{{ new.get_absolute_url }}">{{ new.title }}</a></p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
+{% endblock %}

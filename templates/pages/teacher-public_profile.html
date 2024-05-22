@@ -1,53 +1,8 @@
+{% extends 'bases/base.html' %}
 {% load static %}
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
-
-    <title>Страница преподавателя</title>
-
-    <link rel="stylesheet" href="{% static 'src/css/app.css' %}">
-    <link rel="stylesheet" href="{% static 'src/css/reset.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'src/images/favicon.ico' %}">
-</head>
-<body>
-    <header class="teacher_profile_header">
-        <div class="header_navbar" id="header_navbar">
-            <div class="nav_left_path">
-                <h1><a style="color: #fff;" href="/">Колледж ДГУ</a></h1>
-                <div class="header_burger" id="header_burger"></div>
-            </div>
-            <ul style="width: 55%;" class="nav_right_path" id="nav_right_path">
-                <li><a href="/">Главная</a></li>
-                {% if user.is_teacher %}
-                    <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
-                {% endif %}
-                <li><a href="/news">Новости</a></li>
-                <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
-                {% if user.is_teacher %}
-                    <li><a href="{% url 'users:schedules' %}">Расписание</a></li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                    {% if not user.is_teacher %}
-                        <li><a href="https://bitrix.dgu.ru/eios/Svedeniya-ob-EIOS-bibl.pdf">Библ. ресурсы</a></li>
-                        <li><a href="{% url 'users:blog' %}">Преподаватели</a></li>
-                    {% endif %}
-                    <li><a style="color: #fff;" href="{% url 'users:profile' user.id%}">Профиль</a></li>
-                {% else %}
-                    <li><a style="color: #fff;" href="{% url 'users:login' %}">Вход</a></li>
-                {% endif %}
-                <li class="right_path_logos" id="right_path_logos">
-                    <a href="https://t.me/colledgedsu"><img src="{% static 'src/images/telegram.svg' %}" alt="телеграм"></a>
-                    <a href="https://vk.com/mediaclubcollegedgu"><img src="{% static 'src/images/vk.svg' %}" alt="вк"></a>
-                </li>
-            </ul>
-        </div>
-    </header>
-
+{% block layout %}
     <main>
         <div style="width: 80%;" class="teacher_container" id="teacher_container">
             <div class="teacher_profile" id="teacher_profile">
@@ -81,11 +36,11 @@
                                 <h1 style="line-height: 0.9;">{{ lecture.title }}</h1>
                                 <p>
                                     <button id="podrobnee">
-                                        <a style="color: #fff" href="{% url 'users:lecture_detail' lecture.pk %}">Подробнее</a></b>
+                                        <a style="color: #fff" href="{% url 'data:lecture_detail' lecture.pk %}">Подробнее</a></b>
                                     </button>
                                 </p>
                             </li>
-                            <form action="{% url 'users:add_review' pk=lecture.id %}" enctype="multipart/form-data" autocomplete="off" method="post">
+                            <form action="{% url 'data:add_review' pk=lecture.id %}" enctype="multipart/form-data" autocomplete="off" method="post">
                                 {% csrf_token %}
                                 <section class="lectures_comments">
                                     <button class="show_comment" id="show_comment_{{ lecture.id }}">Показать комментарии ({{ lecture.get_review|length }})</button>
@@ -107,7 +62,7 @@
                                                         </div>
                                                         <div class="right_side">
                                                             {% if review.name == user %}
-                                                                <a href="{% url 'users:delete_review' review.pk %}"><b>&#10006;</b></a>
+                                                                <a href="{% url 'data:delete_review' review.pk %}"><b>&#10006;</b></a>
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -139,5 +94,4 @@
     <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
     <script type="module" src="{% static 'src/scripts/teacher-profile-dropdown.js' %}"></script>
     <script type="module" src="{% static 'src/scripts/drop_comment.js' %}"></script>
-</body>
-</html>
+{% endblock %}

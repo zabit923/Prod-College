@@ -1,0 +1,15 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+
+
+{% block layout %}
+    <main class="one_news_main">
+        <div style="width: 70%;" class="one_news">
+            <img src="{{ news.image.url }}" alt="">
+            <h1 class="one_news_date" id="one_news_date">{{ news.created_at|date:"d.m.Y" }}</h1>
+            <h2 class="one_news_desc" id="one_news_desc">{{ news.title }}</h2>
+            <p class="one_news_par" id="one_news_par">{{ news.description|safe }}</p>
+        </div>
+    </main>
+    <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
+{% endblock %}

@@ -4,10 +4,8 @@ from django.http import JsonResponse
 from .models import News
 
 
-
-
 class IndexView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'pages/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -16,7 +14,7 @@ class IndexView(TemplateView):
 
 
 class NewsView(TemplateView):
-    template_name = 'news.html'
+    template_name = 'pages/news.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -27,4 +25,4 @@ class NewsView(TemplateView):
 class NewsDetailView(DetailView):
     model = News
     slug_field = "slug"
-    template_name = 'one-news.html'
+    template_name = 'pages/one-news.html'

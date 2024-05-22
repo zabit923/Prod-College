@@ -60,7 +60,7 @@ def add_lecture(request):
     else:
         form = LectureForm()
 
-    return render(request, 'new_lesson.html', {'form': form})
+    return render(request, 'pages/new_lesson.html', {'form': form})
 
 
 def delete_lecture(request, lecture_id):
@@ -78,7 +78,7 @@ def delete_lecture(request, lecture_id):
 
 class LectureDetail(DetailView):
     model = Lecture
-    template_name = 'lecture.html'
+    template_name = 'pages/lecture.html'
     context_object_name = 'lecture'
 
     def get_context_data(self, **kwargs):
@@ -96,7 +96,7 @@ class LectureDetail(DetailView):
 
 
 class SchedulesView(TemplateView):
-    template_name = 'schedule.html'
+    template_name = 'pages/schedule.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

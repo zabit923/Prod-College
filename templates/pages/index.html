@@ -1,0 +1,48 @@
+{% extends 'bases/index_base.html' %}
+{% load static %}
+
+
+{% block layout %}
+    <main class="main">
+        <div class="main_content">
+            <div class="main_about_college">
+                <div class="top_info">
+                    <h1>О колледже</h1>
+                </div>
+                <ul class="bottom_info" id="bottom_info">
+                    <li class="bottom_info_left">
+                        <div class="bottom_info_line"></div>
+                        <p>
+                            Дагестанский государственный университет<br>является одним из крупнейших вузов России,<br>
+                            который был создан в 1931 году.
+                        </p>
+                    </li>
+                    <li class="bottom_info_right">
+                        <p>
+                            Колледж ДГУ создан в 2013 году.<br>
+                            Это структурное подразделение Дагестанского<br>
+                            госудраственого университета, обеспечивающее высокое качество подготовки<br>
+                            специалистов среднего звена для удовлетворения потребностей общества в области<br>
+                            права, охраны окружающей среды и природоиспользования, действующее на основании<br>
+                            лицензии университета на право ведения образовательной деятельности.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="main_news" id="main_news">
+                <h1 class="main_news_title">Что нового?</h1>
+                <ul class="main_all_news" id="main_all_news">
+                    {% for new in news %}
+                        <li class="main_news_item item1">
+                            <img src="{{ new.image.url }}" alt="">
+                            <div class="news_date">{{ new.created_at|date:"d.m.Y" }}</div>
+                            <p class="news_desc"><a href="{{ new.get_absolute_url }}">{{ new.title }}</a></p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button><a href="/news">Больше новостей</a></button>
+            </div>
+    </main>
+    {% include 'includes/footer.html' %}
+    <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
+{% endblock %}
