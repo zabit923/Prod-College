@@ -1,0 +1,181 @@
+{% extends 'bases/base_for_profile.html' %}
+{% load link_filter %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7" style="margin: 0 auto; position: relative;">
+            <h4 class="mt-3 mb-3">Профиль</h4>
+            <div class="col-lg-12 text-center">
+                <img width="100" height="100"
+                     src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}"
+                     class="img-thumbnail">
+            </div>
+            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя</label>
+                            {{ form.first_name }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="small mb-1" for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row mb-2">
+                    <div class="col-lg-12">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="userAvatar" name="image" size="50">
+                            <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите
+                                изображение</label>
+                        </div>
+                    </div>
+                </div>
+
+                {% if not user.is_teacher %}
+                    {% for schedule in schedules %}
+                        <a style="margin: 10px;" href="{{ schedule.schedule.url }}">Расписание</a>
+                    {% endfor %}
+                {% endif %}
+                <div class="form-row">
+                    <div class="col-lg-12" style="margin-top: 33px;">
+                        <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-12" style="margin-top: 10px; margin-bottom: 20px;">
+                        <a href="{% url 'users:logout' %}" class="btn btn-info btn-block">Выйти</a>
+                    </div>
+                </div>
+            </form>
+            <form action="{% url 'users:add_personal_link' %}" method="post" enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                {% if user.is_teacher %}
+                <div style="margin-bottom: 20px;" class="important_link">
+                    <div class='important_link_list'>
+                        <button class="btn_important_links" id="btn_important_links">Важные ссылки</button>
+                        <ul class="drop_down_link_list" id="drop_down_link_list">
+                            {% if private_personal_links %}
+                                <div style="margin: 0 auto;"><b>Только у меня</b></div>
+                            {% for link in private_personal_links %}
+                            <li>
+                                <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
+                                <div class="actions_with_links">
+                                    <div class="dropdown_krestik">
+                                        <a style="text-decoration: none;"
+                                           href="{% url 'users:delete_personal_link' link.pk %}">
+                                            &#10006;
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                            {% endif %}
+                            {% if personal_links %}
+                            <div style="margin: 0 auto;"><b>Публичные</b></div>
+                            {% for link in personal_links %}
+                            <li>
+                                <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
+                                <div class="actions_with_links">
+                                    <div class="dropdown_krestik">
+                                        <a style="text-decoration: none;"
+                                           href="{% url 'users:delete_personal_link' link.pk %}">
+                                            &#10006;
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class='important_link_add'>
+                        <button class="btn_add_link" id="btn_add_link">Добавить ссылку</button>
+                        <div class="add_link" id="add_link">
+                            <div style="border: 1px;">{{ form.personal_link_form.title }}</div>
+                            <div style="border: 1px;">{{ form.personal_link_form.link }}</div>
+                            {{ form.personal_link_form.facult }}
+                            {{ form.personal_link_form.course }}
+                            {{ form.personal_link_form.group }}
+                            <div>{{ form.personal_link_form.private }} Только у меня</div>
+                            <input type="submit" class="publish_link" value="Опубликовать">
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
+            <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                {% if user.is_teacher %}
+                <div>
+                    <ul class="teacher_profile_droplist">
+                        <li>{{ form.link_form.facult.label_tag }}</li>
+                        <li>{{ form.link_form.facult }}</li>
+                    </ul>
+                    <ul class="teacher_profile_droplist">
+                        <li>{{ form.link_form.course.label_tag }}</li>
+                        <li>{{ form.link_form.course }}</li>
+                    </ul>
+                    <ul class="teacher_profile_droplist">
+                        <li>{{ form.link_form.group.label_tag }}</li>
+                        <li>{{ form.link_form.group }}</li>
+                    </ul>
+                    <ul>{{ form.link_form.link.label_tag }} {{ form.link_form.link }}</ul>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-12" style="margin-top: 33px;">
+                        <input style="margin-bottom: 40px;" class="btn btn-info btn-block" type="submit"
+                               value="Отправить">
+                    </div>
+                </div>
+                {% endif %}
+            </form>
+                {% if user.is_teacher %}
+                    <div class="msg_teacher_cont">
+                        <button class="btn_teacher_message" id="btn_message">Мои сообщения</button>
+                        <ul class="drop_down_msg_list" id="drop_down_msg_list">
+                            {% for link in links %}
+                            {% if link.link %}
+                                <li>
+                                    <div>
+                                        {{ link.link|format_text|safe }}
+                                    </div>
+                                    <a style="text-decoration: none;" href="{% url 'users:delete_link' link.pk %}">
+                                        &#10006;
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="msg_student_cont" id="msg_student_cont">
+                        <button class="btn_message" id="btn_message"></button>
+                        <ul class="drop_down_msg_list_student" id="drop_down_msg_list">
+                            {% for link in links %}
+                            {% if link.link %}
+                                <li>
+                                    <p><span>Отправитель:</span>
+                                        <a href="{% url 'users:public_profile' link.teacher.id %}">
+                                            {{link.teacher.get_full_name }}
+                                        </a> | <span style="font-size: 12px;">{{ link.created_at|date:"d.m.Y"}}</span>
+                                    </p>
+                                    <div>
+                                        {{ link.link|format_text|safe }}
+                                    </div>
+                                </li>
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+                {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

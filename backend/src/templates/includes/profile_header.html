@@ -1,0 +1,32 @@
+{% load static %}
+
+
+<header class="registration_header">
+    <div class="header_navbar" id="header_navbar">
+        <div class="nav_left_path">
+            <h1><a style="color: #fff;" href="/">Колледж ДГУ</a></h1>
+            <div class="header_burger" id="header_burger"></div>
+        </div>
+        <ul style="width: 65%;" class="nav_right_path" id="nav_right_path">
+            <li><a href="/">Главная</a></li>
+            {% if user.is_teacher %}
+                <li><a href="{% url 'users:teacher_profile' user.id %}">Для преподавателя</a></li>
+            {% endif %}
+            <li><a href="/news">Новости</a></li>
+            <li><a href="{% url 'data:schedules' %}">Расписание</a></li>
+            {% if user.is_authenticated %}
+                {% if not user.is_teacher %}
+                    <li><a href="https://bitrix.dgu.ru/eios/Svedeniya-ob-EIOS-bibl.pdf">Библ. ресурсы</a></li>
+                    <li><a href="{% url 'users:blog' %}">Преподаватели</a></li>
+                {% endif %}
+                <li><a style="color: #fff;" href="{% url 'users:profile' user.id%}">Профиль</a></li>
+            {% else %}
+                <li><a style="color: #fff;" href="{% url 'users:login' %}">Вход</a></li>
+            {% endif %}
+            <li class="right_path_logos" id="right_path_logos">
+                <a href="https://t.me/colledgedsu"><img src="{% static 'src/images/telegram.svg' %}" alt="телеграм"></a>
+                <a href="https://vk.com/mediaclubcollegedgu"><img src="{% static 'src/images/vk.svg' %}" alt="вк"></a>
+            </li>
+        </ul>
+    </div>
+</header>

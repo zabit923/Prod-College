@@ -1,0 +1,72 @@
+@import 'core';
+
+.schedule_content{
+    display: flex;
+    align-items: center;
+    margin-top: 2%;
+    justify-content: space-between;
+    width: 60%;
+    margin-left: auto;
+    margin-right: 40px;
+
+    &>.schedule_title{
+        @include font(46px, 46px, 500);
+    }
+
+    &>a{
+        color: #0668fc;
+        @include font(18px, 18px, 400);
+        text-decoration: underline;
+    }
+}
+
+.schedule_container{
+    @include size(70%, max-content);
+    margin: 0 auto;
+    margin-top: 3%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    &>li{
+        height: 200px;
+        border: 1px solid #0e0e0e;
+        border-radius: 15px;
+        @include font(16px, 26px, 400);
+        padding: 10px;
+        position: relative;
+
+        &>h2{
+            margin-top: 20px;
+            color: rgb(71, 71, 70);
+        }
+
+        &>a{
+            @include font(16px, 16px, 500);
+            color: white;
+
+            &>button{
+                @include button();
+                background-color: black;
+                border-radius: 10px;
+                margin-top: 10%;
+                transition: all .3s ease;
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+
+                &:hover{
+                    background-color: #0accee;
+                }
+    
+            }
+        }   
+    }
+}
+
+.not_schedule_title{
+    text-align: center;
+    @include font(30px, 30px, 400);
+    margin-top: 100px;
+    color: rgb(250, 16, 36);
+}
