@@ -1,0 +1,4 @@
+POSTGRES_DB=your_db_name
+POSTGRES_PASSWORD=your_pass
+POSTGRES_USER=postgres
+POSTGRES_HOST=database

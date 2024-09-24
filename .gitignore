@@ -4,7 +4,7 @@ __pycache__/
 
 *.so
 
-media/
+src/media/
 
 .Python
 build/
@@ -79,7 +79,8 @@ celerybeat.pid
 
 *.sage.py
 
-.env
+src/.env
+.pg-env
 .venv
 env/
 venv/
