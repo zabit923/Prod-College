@@ -6,10 +6,11 @@ from .models import User, Facult, Course, TeacherLink, Group, PersonalTeacherLin
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'course', 'is_teacher')
-    list_filter = ('course', 'facult', 'group', 'is_teacher')
+    list_display = ('first_name', 'last_name', 'course', 'is_teacher', 'is_graduate')
+    list_filter = ('course', 'facult', 'group', 'is_teacher', 'is_graduate')
     search_fields = ('first_name', 'last_name')
     exclude = ('email', 'user_permissions', 'groups', 'date_joined', 'last_login', 'password', 'username')
+    actions = ['mark_as_graduate', 'promote_course']
 
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super().get_search_results(request, queryset, search_term)
@@ -22,6 +23,24 @@ class UserAdmin(admin.ModelAdmin):
                 search_condition |= Q(last_name__icontains=term)
             queryset |= self.model.objects.filter(search_condition)
         return queryset, use_distinct
+
+    @admin.action(description='Отметить как выпускников и удалить курс')
+    def mark_as_graduate(self, request, queryset):
+        updated_count = queryset.update(is_graduate=True, course=None)
+        self.message_user(request, f'{updated_count} студентов отмечены как выпускники и у них удален курс.')
+
+    @admin.action(description='Повысить курс для выбранных студентов')
+    def promote_course(self, request, queryset):
+        for student in queryset.filter(is_graduate=False):
+            if student.course:
+                try:
+                    current_course_number = int(student.course.name)
+                    new_course = Course.objects.get(name=str(current_course_number + 1))
+                    student.course = new_course
+                    student.save()
+                except Course.DoesNotExist:
+                    continue
+        self.message_user(request, 'Выбранным студентам успешно повышен курс.')
 
 
 @admin.register(Facult)
