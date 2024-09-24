@@ -1,0 +1,146 @@
+@import 'core';
+
+.blog_header{
+    @include size(100%, 70px);
+    background-color: #0e0e0e;
+    padding-top: 15px;
+    
+    &>.header_navbar{
+        max-width: 100%;
+        padding: 0 40px 0 40px;
+        max-height: max-content;
+        @include flex(space-between);
+        margin: 0 auto;
+        color: #fff;
+    
+    
+        &>.nav_left_path{
+    
+            &>h1{
+                @include font(20px, 30px, 500);
+                cursor: pointer;
+            }
+        }
+    
+    
+        &>.nav_right_path{
+            @include flex(space-between);
+            width: 39%;
+    
+            &>li a{
+                @include font(16px, 26px, 500);
+                cursor: pointer;
+                transition: all .3s ease;
+                color: #fff;
+    
+                &:hover{
+                    color: #0accee;
+                }
+                
+            }
+    
+            &>.right_path_logos{
+                @include flex(space-between);
+                width: 60px;
+                padding-top: 5px;
+                gap: 10px;
+    
+                &>a img{
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+.main_blog_form{
+    position: relative;
+    @include size(30%, max-content);
+    margin: 0 auto;
+    margin-top: 3%;
+    background: var(--bg-popup-default, #FFF);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.20);
+    border-radius: 12px;
+    margin-bottom: 50px;
+
+    &>h1{
+        @include font(28px, 68px, 400);
+        text-align: center;
+    }
+
+    &>input{
+        @include font(14px, 18px, 400);
+        @include size(80%, 5%);
+        margin-left: 9%;
+        margin-top: 2%;
+        padding: 10px;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &>textarea{
+        @include font(14px, 18px, 400);
+        @include size(80%, 50%);
+        margin-left: 9%;
+        margin-top: 5%;
+        resize: none;
+        padding: 10px;
+        border-radius: 7px;
+
+        &:focus{
+            outline: none;
+        }
+    }
+}
+
+textarea::-webkit-scrollbar {
+    width: 12px;
+    /* ширина всей полосы прокрутки */
+}
+
+textarea::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+    /* цвет зоны отслеживания */
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 0, 0);
+    /* цвет бегунка */
+    border-radius: 20px;
+    /* округлось бегунка */
+    border: 3px solid rgb(255, 255, 255);
+    /* отступ вокруг бегунка */
+}
+
+.ckeditor{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.publish_lecture {
+    @include size(84%, 70px);
+    @include font(24px, 18px, 500);
+    background-color: #0accee;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    margin-left: 9%;
+    margin-top: 2%;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.add_lectures_droplist{
+    margin: 0 auto;
+    width: fit-content;
+    @include font(16px, 16px, 400);
+
+    &>select > option{
+        @include font(14px, 14px, 400);
+    }
+}

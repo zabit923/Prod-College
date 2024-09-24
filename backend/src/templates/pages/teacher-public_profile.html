@@ -1,0 +1,97 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+
+
+{% block layout %}
+    <main>
+        <div style="width: 80%;" class="teacher_container" id="teacher_container">
+            <div class="teacher_profile" id="teacher_profile">
+                <label class="input-file">
+                    <img src="{% if teacher.image %} {{ teacher.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
+                </label>
+                <div class="teacher_name">
+                    <h1>{{ teacher.first_name }}</h1>
+                    <h2>{{ teacher.last_name }}</h2>
+                </div>
+                <div style="margin-bottom: 20px;" class="important_link_teacher_profile">
+                    <div class='important_link_list_teacher_profile'>
+                        <button class="btn_important_links_teacher_profile" id="btn_important_links">Важные ссылки</button>
+                        <ul class="drop_down_link_list" id="drop_down_link_list">
+                            {% for link in personal_links %}
+                                <li>
+                                    <a style="font-size: 18px;" href="{{ link.link }}">{{ link.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="teacher_lectures">
+                <h1>Учебные материалы</h1>
+                <div class="teacher_line"></div>
+                {% if lectures %}
+                    {% for lecture in lectures %}
+                        <ul style="grid-template-columns: repeat(1, 1fr);" class="all_lectures">
+                            <li style="max-height: 200px; overflow: hidden;" class="lecture">
+                                <h1 style="line-height: 0.9;">{{ lecture.title }}</h1>
+                                <p>
+                                    <button id="podrobnee">
+                                        <a style="color: #fff" href="{% url 'data:lecture_detail' lecture.pk %}">Подробнее</a></b>
+                                    </button>
+                                </p>
+                            </li>
+                            <form action="{% url 'data:add_review' pk=lecture.id %}" enctype="multipart/form-data" autocomplete="off" method="post">
+                                {% csrf_token %}
+                                <section class="lectures_comments">
+                                    <button class="show_comment" id="show_comment_{{ lecture.id }}">Показать комментарии ({{ lecture.get_review|length }})</button>
+                                    <div class="comments_container" id="comments_container">
+                                        <div class="show_all_comments" id="show_all_comments">
+                                            {% for review in lecture.get_review %}
+                                                <div class="comment">
+                                                    <img class="user_ava" src="{% if review.name.image %}{{ review.name.image.url }}{% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
+                                                    <div class="user_data">
+                                                        <div class="left_side">
+                                                            <h1 class="user_name" id="user_name_{{ review.name.id }}">
+                                                                {{ review.name.first_name }} {{ review.name.last_name }}
+                                                            </h1>
+                                                            <p class="user_comment">{{ review.text }}</p>
+                                                            {% if review.file %}
+                                                                <a style="margin-top: 10px; text-decoration: underline; color: #17A2B8; font-family: 'Inter', sans-serif; font-size: 12px;" href="{{ review.file.url }}">Посмотреть прикрепленный файл</a>
+                                                            {% endif %}
+                                                            <h2 style="margin-top: 15px" class="answer_comment">Ответить</h2>
+                                                        </div>
+                                                        <div class="right_side">
+                                                            {% if review.name == user %}
+                                                                <a href="{% url 'data:delete_review' review.pk %}"><b>&#10006;</b></a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="publish_comment">
+                                            <img class="my_ava"
+                                                 src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'src\images\default_avatar.jpg' %} {% endif %}">
+                                            <div class="my_data">
+                                                <div class="my_name_cont">
+                                                    <h1 class="my_name">{{ user.first_name }} {{ user.last_name }}</h1>
+                                                    {{ form.text }}
+                                                    {{ form.file }}
+                                                </div>
+                                                <button style="border: 0; background-color: #fff" type="submit" class="publish_btn"></button>
+                                            </div>
+                                        </div>
+                                </section>
+                            </form>
+                        </ul>
+                    {% endfor %}
+                {% else %}
+                    <h2>Учебных материалов нет</h2>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <script type="module" src="{% static 'src/scripts/index.js' %}"></script>
+    <script type="module" src="{% static 'src/scripts/teacher-profile-dropdown.js' %}"></script>
+    <script type="module" src="{% static 'src/scripts/drop_comment.js' %}"></script>
+{% endblock %}

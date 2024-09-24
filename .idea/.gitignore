@@ -1,6 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+<<<<<<< HEAD
 /users/
 /news/
 /media/
@@ -8,3 +9,5 @@
 /lessons/
 /config/
 /conf/
+=======
+>>>>>>> origin/master

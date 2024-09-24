@@ -1,0 +1,170 @@
+@import 'core';
+
+.registration_body{
+    @include size(100%, 100vh);
+    background-color: #C4D4E7;
+}
+
+.registration_header{
+    @include size(100%, 70px);
+    background-color: #0e0e0e;
+    padding-top: 15px;
+
+
+    &>.header_navbar{
+        max-width: 100%;
+        padding: 0 40px 0 40px;
+        max-height: max-content;
+        @include flex(space-between);
+        margin: 0 auto;
+        color: #fff;
+
+
+        &>.nav_left_path{
+
+            &>h1{
+                @include font(20px, 30px, 500);
+                cursor: pointer;
+            }
+        }
+
+
+        &>.nav_right_path{
+            @include flex(space-between);
+            width: 39%;
+
+            &>li a{
+                @include font(16px, 26px, 500);
+                cursor: pointer;
+                transition: all .3s ease;
+                color: #fff;
+
+                &:hover{
+                    color: #0accee;
+                }
+                
+            }
+
+            &>.right_path_logos{
+                @include flex(space-between);
+                width: 60px;
+                padding-top: 5px;
+                gap: 10px;
+
+                &>a img{
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+// .registration_main{
+//     padding-top: 10%;
+// }
+.profile_container{
+    @include size(500px, 500px);
+    margin: 0 auto;
+    margin-top: 5%;
+    background-color: #fff;
+    border-radius: 15px;
+
+    &>.profile_title{
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid rgba(14, 14, 14, 1);
+        &>h1{
+            @include font(36px, 46px, 500);
+            text-align: center;
+        }
+    }
+
+    &>.profile_info{
+        @include size(max-content, max-content);
+        padding-top: 20px;
+        margin: 0 auto;
+
+        &>.input_ava{
+        }
+
+        &>img{
+            width: 50%;
+            border-radius: 140px;
+            margin-left: 25%;    
+        } 
+        
+        &>.profile_name_data{
+            display: flex;
+            gap: 10px;
+            margin-top: 40px;
+
+            &>.first_name, .last_name{
+                height: 25px;
+                border: none;
+                border-bottom: 1px solid #726f6f;
+                @include font(14px, 14px, 400);
+
+                &:focus{
+                    outline: none
+                }
+            }
+        }
+
+        &>.profile_role{
+            margin-top: 20px;
+            text-align: center;
+            @include font(16px, 16px, 400);
+            color: #726f6f;
+        }
+
+        &>.edit_info{
+            width: 30px;
+            margin: 0 auto;
+            margin-top: 60px;
+            cursor: pointer;
+
+            &>img{
+                width: 100%;
+            }
+        }
+    }
+}
+
+.avatar-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 20px auto;
+}
+
+#avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+input[type="file"]::before {
+    content: 'Выберите фото';
+    display: inline-block;
+    background: #3498db;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="file"]:hover::before {
+    background: #0accee;
+}
+
+
+.input_ava {
+    color: transparent;
+    margin-left: 140px;
+}
+
