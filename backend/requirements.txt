@@ -6,7 +6,7 @@ django-ckeditor==6.7.0
 django-js-asset==2.1.0
 django-recaptcha3==0.4.0
 idna==3.4
-Pillow==10.0.1
+Pillow==12.3.0
 psycopg2-binary==2.9.7
 python-dotenv==1.0.1
 requests==2.31.0
